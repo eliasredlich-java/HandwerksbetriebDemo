@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Schmidt & Söhne – Dacharbeiten, Sanierungen und energetische Dämmung in der Region.">
+  <title>Schmidt & Söhne | Dacharbeiten mit Bestand</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#1C2024',
+            brick: '#B84A39',
+            paper: '#F8F9FA',
+            line: '#D9DEE2',
+            fog: '#EFF1F2'
+          },
+          fontFamily: {
+            sans: ['DM Sans', 'sans-serif'],
+            display: ['Manrope', 'sans-serif']
+          },
+          boxShadow: {
+            soft: '0 16px 40px rgba(28, 32, 36, 0.08)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root { color-scheme: light; }
+    html { scroll-behavior: smooth; }
+    body { background: #F8F9FA; color: #1C2024; }
+    ::selection { background: #B84A39; color: #fff; }
+    .hero-image { animation: hero-in 900ms cubic-bezier(.22, 1, .36, 1) both; }
+    .reveal { animation: reveal-in 700ms cubic-bezier(.22, 1, .36, 1) both; }
+    .delay-1 { animation-delay: 120ms; }
+    .delay-2 { animation-delay: 220ms; }
+    .delay-3 { animation-delay: 320ms; }
+    .line-mark { position: relative; }
+    .line-mark::after { content: ''; position: absolute; left: 0; bottom: -8px; width: 36px; height: 3px; background: #B84A39; }
+    .step-panel[hidden] { display: none; }
+    @keyframes hero-in { from { transform: scale(1.05); opacity: .4; } to { transform: scale(1); opacity: 1; } }
+    @keyframes reveal-in { from { transform: translateY(16px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body class="font-sans antialiased">
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-3 focus:text-white">Zum Inhalt springen</a>
+
+  <header class="absolute inset-x-0 top-0 z-20 border-b border-white/20 text-white">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 lg:px-8">
+      <a href="#top" class="flex items-center gap-3" aria-label="Schmidt & Söhne Startseite">
+        <span class="grid h-10 w-10 place-items-center border border-white/60 font-display text-lg font-extrabold">S&S</span>
+        <span class="font-display text-sm font-bold tracking-[0.12em]">SCHMIDT &amp; SÖHNE</span>
+      </a>
+      <nav class="hidden items-center gap-8 text-sm font-medium md:flex" aria-label="Hauptnavigation">
+        <a class="transition-colors hover:text-white/70" href="#leistungen">Leistungen</a>
+        <a class="transition-colors hover:text-white/70" href="#referenz">Referenz</a>
+        <a class="transition-colors hover:text-white/70" href="#bewerbung">Karriere</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <a class="hidden text-sm font-semibold sm:block" href="tel:+494012345670">040 123 45 670</a>
+        <a href="#anfrage" class="inline-flex min-h-11 items-center justify-center bg-brick px-4 text-sm font-bold text-white transition-colors hover:bg-[#94392d] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-ink">Angebot anfragen</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section id="top" class="relative isolate flex min-h-[680px] items-end overflow-hidden bg-ink text-white lg:min-h-[760px]">
+      <img class="hero-image absolute inset-0 h-full w-full object-cover" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=2200&q=88" alt="Dachdecker arbeitet auf einem Dach bei warmem Abendlicht" width="2200" height="1467">
+      <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(28,32,36,.94)_0%,rgba(28,32,36,.72)_42%,rgba(28,32,36,.18)_100%)]"></div>
+      <div class="absolute inset-0 bg-[linear-gradient(0deg,rgba(28,32,36,.72)_0%,transparent_42%)]"></div>
+      <div class="relative mx-auto w-full max-w-7xl px-5 pb-20 pt-40 lg:px-8 lg:pb-28">
+        <div class="max-w-3xl">
+          <p class="reveal mb-6 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-white/70"><span class="h-px w-10 bg-brick"></span> Dachdeckermeisterbetrieb seit 1999</p>
+          <h1 class="reveal delay-1 max-w-3xl font-display text-5xl font-extrabold leading-[1.04] tracking-[-0.04em] sm:text-6xl lg:text-8xl">Zuverlässige Dacharbeiten &amp; Sanierungen in der Region.</h1>
+          <p class="reveal delay-2 mt-7 max-w-xl text-lg leading-8 text-white/80">Ihr Dach schützt, was Ihnen wichtig ist. Wir halten dieses Versprechen – mit sauberem Handwerk, ehrlicher Beratung und einem Team, das erreichbar bleibt.</p>
+          <div class="reveal delay-3 mt-9 flex flex-col gap-3 sm:flex-row">
+            <a href="#anfrage" class="inline-flex min-h-14 items-center justify-center bg-brick px-6 text-base font-bold text-white transition-colors hover:bg-[#94392d] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-ink">Projekt besprechen <span class="ml-3" aria-hidden="true">↗</span></a>
+            <a href="tel:+494012345670" class="inline-flex min-h-14 items-center justify-center border border-white/50 px-6 text-base font-bold text-white transition-colors hover:border-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white">Im Notfall anrufen</a>
+          </div>
+        </div>
+        <div class="mt-20 flex flex-wrap gap-x-8 gap-y-3 border-t border-white/25 pt-5 text-sm text-white/75">
+          <span>25+ Jahre Erfahrung</span><span>Meisterbetrieb</span><span>5 Jahre Garantie auf Eindeckungen</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b border-line bg-white" aria-label="Kennzahlen">
+      <div class="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-y divide-line px-5 md:grid-cols-4 md:divide-y-0 lg:px-8">
+        <div class="px-4 py-8 md:px-8"><p class="font-display text-3xl font-extrabold tracking-[-0.04em]">48h</p><p class="mt-2 text-sm text-ink/60">Reaktionszeit bei Notfällen</p></div>
+        <div class="px-4 py-8 md:px-8"><p class="font-display text-3xl font-extrabold tracking-[-0.04em]">350<span class="text-brick">+</span></p><p class="mt-2 text-sm text-ink/60">Dächer zuverlässig saniert</p></div>
+        <div class="px-4 py-8 md:px-8"><p class="font-display text-3xl font-extrabold tracking-[-0.04em]">Meister</p><p class="mt-2 text-sm text-ink/60">geführt und ausgebildet</p></div>
+        <div class="px-4 py-8 md:px-8"><p class="font-display text-3xl font-extrabold tracking-[-0.04em]">100<span class="text-brick">%</span></p><p class="mt-2 text-sm text-ink/60">Termintreue als Anspruch</p></div>
+      </div>
+    </section>
+
+    <section id="leistungen" class="mx-auto max-w-7xl px-5 py-24 lg:px-8 lg:py-32">
+      <div class="grid gap-12 lg:grid-cols-[.75fr_1.25fr] lg:gap-24">
+        <div>
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-brick">Was wir bauen</p>
+          <h2 class="line-mark mt-5 max-w-md font-display text-4xl font-extrabold leading-tight tracking-[-0.04em] sm:text-5xl">Ein Dach, das bleibt.</h2>
+          <p class="mt-10 max-w-sm text-base leading-7 text-ink/65">Von der ersten Bestandsaufnahme bis zum letzten Handgriff: Wir planen vorausschauend und arbeiten so, dass Sie den Unterschied spüren – nicht den Baustress.</p>
+        </div>
+        <div class="grid gap-0 divide-y divide-line border-y border-line">
+          <article class="group grid gap-6 py-8 sm:grid-cols-[auto_1fr_auto] sm:items-start">
+            <span class="font-display text-sm font-bold text-brick">01</span><div><h3 class="font-display text-2xl font-bold">Flachdachsanierung</h3><p class="mt-3 max-w-lg leading-7 text-ink/65">Dichte Lösungen für Gewerbe- und Wohngebäude. Mit klarer Diagnose, robusten Materialien und dokumentierter Ausführung.</p></div><span class="hidden text-2xl text-brick transition-transform group-hover:translate-x-1 sm:block" aria-hidden="true">↗</span>
+          </article>
+          <article class="group grid gap-6 py-8 sm:grid-cols-[auto_1fr_auto] sm:items-start">
+            <span class="font-display text-sm font-bold text-brick">02</span><div><h3 class="font-display text-2xl font-bold">Steildach &amp; Ziegel</h3><p class="mt-3 max-w-lg leading-7 text-ink/65">Dachstühle, Eindeckungen und Reparaturen, die Wind und Wetter standhalten – passend zu Architektur und Budget.</p></div><span class="hidden text-2xl text-brick transition-transform group-hover:translate-x-1 sm:block" aria-hidden="true">↗</span>
+          </article>
+          <article class="group grid gap-6 py-8 sm:grid-cols-[auto_1fr_auto] sm:items-start">
+            <span class="font-display text-sm font-bold text-brick">03</span><div><h3 class="font-display text-2xl font-bold">Energetische Dämmung</h3><p class="mt-3 max-w-lg leading-7 text-ink/65">Weniger Wärmeverlust, mehr Wohnkomfort. Wir bringen Dämmung, Belüftung und Förderfähigkeit zusammen.</p></div><span class="hidden text-2xl text-brick transition-transform group-hover:translate-x-1 sm:block" aria-hidden="true">↗</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="referenz" class="bg-ink text-white">
+      <div class="mx-auto grid max-w-7xl lg:grid-cols-[1.1fr_.9fr]">
+        <div class="grid grid-cols-2">
+          <figure class="relative aspect-[4/5] overflow-hidden"><img class="h-full w-full object-cover" src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=1000&q=85" alt="Älteres Ziegeldach vor der Sanierung" width="1000" height="1250" loading="lazy"><figcaption class="absolute bottom-5 left-5 bg-ink/90 px-3 py-2 text-xs font-bold uppercase tracking-[0.15em]">Vorher</figcaption></figure>
+          <figure class="relative aspect-[4/5] overflow-hidden"><img class="h-full w-full object-cover" src="https://images.unsplash.com/photo-1598902108854-10e335adac99?auto=format&fit=crop&w=1000&q=85" alt="Sauber saniertes Dach mit neuen Ziegeln" width="1000" height="1250" loading="lazy"><figcaption class="absolute bottom-5 left-5 bg-brick px-3 py-2 text-xs font-bold uppercase tracking-[0.15em]">Nachher</figcaption></figure>
+        </div>
+        <div class="flex flex-col justify-center px-5 py-16 sm:px-10 lg:px-16 lg:py-20">
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-brick">Projekt 24 / Altbau-Sanierung</p>
+          <h2 class="mt-5 font-display text-4xl font-extrabold leading-tight tracking-[-0.04em] sm:text-5xl">Aus Substanz wird Zukunft.</h2>
+          <p class="mt-7 leading-7 text-white/65">Ein 70 Jahre altes Wohnhaus, energetisch auf Stand gebracht und mit einem neuen, langlebigen Ziegeldach abgeschlossen. In 18 Arbeitstagen – bei laufendem Betrieb.</p>
+          <div class="mt-10 grid grid-cols-2 gap-6 border-t border-white/20 pt-6"><div><p class="font-display text-2xl font-bold">18</p><p class="mt-1 text-sm text-white/55">Arbeitstage</p></div><div><p class="font-display text-2xl font-bold">42%</p><p class="mt-1 text-sm text-white/55">weniger Wärmeverlust</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="anfrage" class="mx-auto max-w-7xl px-5 py-24 lg:px-8 lg:py-32">
+      <div class="grid gap-12 lg:grid-cols-[.85fr_1.15fr] lg:gap-24">
+        <div><p class="text-xs font-bold uppercase tracking-[0.2em] text-brick">Express-Anfrage</p><h2 class="mt-5 max-w-md font-display text-4xl font-extrabold leading-tight tracking-[-0.04em] sm:text-5xl">Drei Fragen. Ein klarer nächster Schritt.</h2><p class="mt-7 max-w-sm leading-7 text-ink/65">Schildern Sie uns kurz Ihr Vorhaben. Wir melden uns innerhalb eines Werktags mit einer ersten Einschätzung.</p><div class="mt-10 border-l-2 border-brick pl-5 text-sm leading-6 text-ink/60">Keine Massenabfertigung. Ihre Angaben landen direkt bei unserem Meisterteam.</div></div>
+        <div class="border border-line bg-white p-6 shadow-soft sm:p-10">
+          <div class="mb-10 flex items-center justify-between"><div class="flex items-center gap-2" aria-label="Schritt 1 von 3"><span class="step-dot grid h-8 w-8 place-items-center bg-brick text-sm font-bold text-white" data-step-dot="1">1</span><span class="h-px w-8 bg-line sm:w-14"></span><span class="step-dot grid h-8 w-8 place-items-center border border-line text-sm font-bold text-ink/40" data-step-dot="2">2</span><span class="h-px w-8 bg-line sm:w-14"></span><span class="step-dot grid h-8 w-8 place-items-center border border-line text-sm font-bold text-ink/40" data-step-dot="3">3</span></div><span class="text-xs font-bold uppercase tracking-[0.15em] text-ink/45" id="step-label">Schritt 1 von 3</span></div>
+          <form id="quote-form">
+            <fieldset class="step-panel" data-step="1"><legend class="font-display text-2xl font-bold">Was muss gemacht werden?</legend><p class="mt-2 text-sm text-ink/60">Wählen Sie, was am ehesten passt.</p><div class="mt-7 grid gap-3 sm:grid-cols-2"><label class="cursor-pointer border border-line p-4 transition-colors has-[:checked]:border-brick has-[:checked]:bg-[#fcf4f2]"><input class="sr-only" type="radio" name="service" value="Sanierung" required><span class="block font-bold">Sanierung</span><span class="mt-1 block text-sm text-ink/55">Bestehendes Dach erneuern</span></label><label class="cursor-pointer border border-line p-4 transition-colors has-[:checked]:border-brick has-[:checked]:bg-[#fcf4f2]"><input class="sr-only" type="radio" name="service" value="Reparatur"><span class="block font-bold">Reparatur</span><span class="mt-1 block text-sm text-ink/55">Schaden schnell beheben</span></label><label class="cursor-pointer border border-line p-4 transition-colors has-[:checked]:border-brick has-[:checked]:bg-[#fcf4f2]"><input class="sr-only" type="radio" name="service" value="Dämmung"><span class="block font-bold">Dämmung</span><span class="mt-1 block text-sm text-ink/55">Energie sparen</span></label><label class="cursor-pointer border border-line p-4 transition-colors has-[:checked]:border-brick has-[:checked]:bg-[#fcf4f2]"><input class="sr-only" type="radio" name="service" value="Neubau"><span class="block font-bold">Neubau</span><span class="mt-1 block text-sm text-ink/55">Von Grund auf planen</span></label></div></fieldset>
+            <fieldset class="step-panel" data-step="2" hidden><legend class="font-display text-2xl font-bold">Welche Gebäudeart?</legend><p class="mt-2 text-sm text-ink/60">Damit wir den Aufwand besser einschätzen können.</p><div class="mt-7 grid gap-3 sm:grid-cols-3"><label class="cursor-pointer border border-line p-5 text-center transition-colors has-[:checked]:border-brick has-[:checked]:bg-[#fcf4f2]"><input class="sr-only" type="radio" name="building" value="Einfamilienhaus" required><span class="block font-bold">Einfamilienhaus</span></label><label class="cursor-pointer border border-line p-5 text-center transition-colors has-[:checked]:border-brick has-[:checked]:bg-[#fcf4f2]"><input class="sr-only" type="radio" name="building" value="Mehrfamilienhaus"><span class="block font-bold">Mehrfamilienhaus</span></label><label class="cursor-pointer border border-line p-5 text-center transition-colors has-[:checked]:border-brick has-[:checked]:bg-[#fcf4f2]"><input class="sr-only" type="radio" name="building" value="Gewerbe"><span class="block font-bold">Gewerbe</span></label></div></fieldset>
+            <fieldset class="step-panel" data-step="3" hidden><legend class="font-display text-2xl font-bold">Wie erreichen wir Sie?</legend><p class="mt-2 text-sm text-ink/60">Wir melden uns persönlich, nicht automatisiert.</p><div class="mt-7 grid gap-4"><label class="text-sm font-bold" for="name">Ihr Name<input id="name" name="name" type="text" autocomplete="name" required class="mt-2 block min-h-12 w-full border border-line px-4 font-normal outline-none transition-colors focus:border-brick focus:ring-2 focus:ring-brick/20" placeholder="Vor- und Nachname"></label><label class="text-sm font-bold" for="phone">Telefonnummer<input id="phone" name="phone" type="tel" autocomplete="tel" required class="mt-2 block min-h-12 w-full border border-line px-4 font-normal outline-none transition-colors focus:border-brick focus:ring-2 focus:ring-brick/20" placeholder="040 123 45 670"></label></div></fieldset>
+            <div class="mt-9 flex items-center justify-between gap-3"><button type="button" id="back-button" class="min-h-12 px-2 text-sm font-bold text-ink/55 transition-colors hover:text-ink" hidden>← Zurück</button><button type="button" id="next-button" class="ml-auto inline-flex min-h-12 items-center justify-center bg-ink px-6 text-sm font-bold text-white transition-colors hover:bg-brick focus:outline-none focus:ring-2 focus:ring-brick focus:ring-offset-2">Weiter <span class="ml-3" aria-hidden="true">→</span></button><button type="submit" id="submit-button" class="ml-auto inline-flex min-h-12 items-center justify-center bg-brick px-6 text-sm font-bold text-white transition-colors hover:bg-[#94392d] focus:outline-none focus:ring-2 focus:ring-brick focus:ring-offset-2" hidden>Anfrage senden <span class="ml-3" aria-hidden="true">↗</span></button></div>
+            <p id="form-status" class="mt-5 text-sm font-medium text-brick" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="bewerbung" class="border-y border-line bg-fog">
+      <div class="mx-auto grid max-w-7xl gap-8 px-5 py-16 md:grid-cols-[1fr_auto] md:items-center lg:px-8 lg:py-20"><div><p class="text-xs font-bold uppercase tracking-[0.2em] text-brick">Arbeiten mit Rückgrat</p><h2 class="mt-4 font-display text-3xl font-extrabold tracking-[-0.04em] sm:text-4xl">Du kannst Dach? Dann komm zu uns.</h2><p class="mt-4 max-w-2xl leading-7 text-ink/65">Wir suchen Gesellen, die ihr Handwerk ernst nehmen und trotzdem gern miteinander lachen. 60 Sekunden, kein Lebenslauf.</p></div><a href="mailto:jobs@schmidt-soehne.example?subject=60-Sekunden-Bewerbung" class="inline-flex min-h-14 items-center justify-center border-2 border-ink px-6 text-sm font-bold transition-colors hover:bg-ink hover:text-white focus:outline-none focus:ring-2 focus:ring-brick focus:ring-offset-2">Jetzt ohne Lebenslauf bewerben <span class="ml-3" aria-hidden="true">↗</span></a></div>
+    </section>
+  </main>
+
+  <footer class="bg-ink text-white"><div class="mx-auto grid max-w-7xl gap-12 px-5 py-14 lg:grid-cols-[1.4fr_1fr_1fr] lg:px-8"><div><div class="flex items-center gap-3"><span class="grid h-10 w-10 place-items-center border border-white/60 font-display text-lg font-extrabold">S&S</span><span class="font-display text-sm font-bold tracking-[0.12em]">SCHMIDT &amp; SÖHNE</span></div><p class="mt-6 max-w-xs text-sm leading-6 text-white/55">Dacharbeiten mit Bestand. Für Häuser, die bleiben sollen.</p></div><div><h2 class="text-sm font-bold">Erreichbarkeit</h2><p class="mt-4 text-sm leading-7 text-white/55">Mo–Fr: 07:00–18:00 Uhr<br>Notdienst: 24 Stunden<br><a class="text-white underline decoration-brick underline-offset-4" href="tel:+494012345670">040 123 45 670</a></p></div><div><h2 class="text-sm font-bold">Rechtliches</h2><nav class="mt-4 flex flex-col gap-3 text-sm text-white/55" aria-label="Footer-Navigation"><a class="transition-colors hover:text-white" href="#">Impressum</a><a class="transition-colors hover:text-white" href="#">Datenschutz</a><span>Mitglied der Handwerkskammer<br>Hamburg · Meisterbetrieb</span></nav></div></div><div class="border-t border-white/15"><div class="mx-auto flex max-w-7xl flex-col gap-3 px-5 py-5 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between lg:px-8"><span>© 2026 Schmidt &amp; Söhne Dachdeckermeisterbetrieb</span><span>Made for solid work.</span></div></div></footer>
+
+  <script>
+    (() => {
+      const form = document.querySelector('#quote-form');
+      const panels = [...document.querySelectorAll('.step-panel')];
+      const dots = [...document.querySelectorAll('[data-step-dot]')];
+      const nextButton = document.querySelector('#next-button');
+      const backButton = document.querySelector('#back-button');
+      const submitButton = document.querySelector('#submit-button');
+      const status = document.querySelector('#form-status');
+      const stepLabel = document.querySelector('#step-label');
+      let currentStep = 1;
+
+      const renderStep = () => {
+        panels.forEach((panel) => { panel.hidden = Number(panel.dataset.step) !== currentStep; });
+        dots.forEach((dot) => {
+          const active = Number(dot.dataset.stepDot) <= currentStep;
+          dot.classList.toggle('bg-brick', active);
+          dot.classList.toggle('text-white', active);
+          dot.classList.toggle('border-line', !active);
+          dot.classList.toggle('text-ink/40', !active);
+        });
+        stepLabel.textContent = `Schritt ${currentStep} von 3`;
+        backButton.hidden = currentStep === 1;
+        nextButton.hidden = currentStep === 3;
+        submitButton.hidden = currentStep !== 3;
+      };
+
+      nextButton.addEventListener('click', () => {
+        const activePanel = panels.find((panel) => Number(panel.dataset.step) === currentStep);
+        if (!activePanel.querySelector('input:checked')) {
+          status.textContent = 'Bitte wählen Sie eine Option aus.';
+          return;
+        }
+        status.textContent = '';
+        currentStep = Math.min(3, currentStep + 1);
+        renderStep();
+      });
+      backButton.addEventListener('click', () => { status.textContent = ''; currentStep = Math.max(1, currentStep - 1); renderStep(); });
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        status.textContent = 'Danke. Ihre Anfrage ist eingegangen – wir melden uns innerhalb eines Werktags.';
+        submitButton.disabled = true;
+        submitButton.classList.add('opacity-60');
+        submitButton.textContent = 'Anfrage erhalten';
+      });
+      renderStep();
+    })();
+  </script>
+</body>
+</html>
