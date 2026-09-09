@@ -166,21 +166,23 @@
     }
     @media(min-width:768px){#top>div.relative>div.mt-20>div:first-child{display:grid!important;grid-template-columns:repeat(3,minmax(max-content,1fr));gap:2rem!important;align-items:start}}
     /* Services feature grid: high contrast, real craft imagery, compact content. */
-    #leistungen{background:#0f172a!important;color:#f8fafc!important;background-image:none!important;padding-top:88px!important;padding-bottom:96px!important}
+    #leistungen{background:#f8fafc!important;color:#0f172a!important;background-image:none!important;padding-top:88px!important;padding-bottom:96px!important}
     #leistungen>div{width:min(1180px,100%);margin-inline:auto}
     #leistungen>div>div:first-child{align-self:center}
-    #leistungen>div>div:first-child>p:not(.text-xs){color:#e2e8f0!important;max-width:38ch;line-height:1.65}
-    #leistungen h2,#leistungen h3{color:#f8fafc!important}
+    #leistungen>div>div:first-child>p:not(.text-xs){color:#334155!important;max-width:38ch;line-height:1.65}
+    #leistungen h2,#leistungen h3{color:#0f172a!important}
     #leistungen>div>div:first-child>a[href="#anfrage"]{display:inline-flex;align-items:center;gap:10px;margin-top:28px;padding:12px 24px;border:0;border-radius:6px;background:var(--rust);color:#fff;text-decoration:none;box-shadow:0 6px 16px rgba(0,0,0,.18);font-weight:700}
-    #leistungen>div>div:nth-child(2){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:start}
-    #leistungen article{display:flex;min-width:0;height:auto!important;min-height:0!important;flex-direction:column;align-items:stretch;overflow:hidden;padding:0 0 24px!important;border:0!important;border-radius:12px!important;background:#fff!important;box-shadow:0 4px 20px rgba(0,0,0,.12)!important;color:#1e293b!important}
-    #leistungen article>img{display:block;width:100%;height:auto;aspect-ratio:16 / 9;object-fit:cover;border-radius:12px 12px 0 0}
+    #leistungen>div>div:nth-child(2){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
+    #leistungen article{display:flex;min-width:0;height:100%!important;min-height:0!important;flex-direction:column;align-items:stretch;justify-content:flex-start;overflow:hidden;padding:0 1.5rem 1.5rem!important;border:1px solid #e2e8f0!important;border-radius:12px!important;background:#fff!important;box-shadow:0 4px 12px rgba(0,0,0,.04)!important;color:#1e293b!important}
+    #leistungen article>img{display:block;width:calc(100% + 3rem);height:auto;aspect-ratio:16 / 9;object-fit:cover;margin:0 -1.5rem;border-radius:8px 8px 0 0}
     #leistungen article>svg{display:none!important}
-    #leistungen article h3{margin:20px 22px 0!important;color:#0f172a!important;font-size:1.3rem;line-height:1.15}
-    #leistungen article p{margin:10px 22px 0!important;color:#334155!important;font-size:.95rem;line-height:1.55}
-    #leistungen article>a{display:inline-flex;align-items:center;gap:6px;margin:18px 22px 0;color:var(--rust);font-size:.84rem;font-weight:700;text-decoration:none}
+    #leistungen article h3{margin:20px 0 0!important;color:#0f172a!important;font-size:1.3rem;line-height:1.15;font-weight:700}
+    #leistungen article p{margin:10px 0 0!important;color:#334155!important;font-size:.95rem;line-height:1.6}
+    #leistungen article>a{display:inline-flex;align-items:center;gap:6px;margin: auto 0 0;padding-top:1rem;color:#dc2626;font-size:.84rem;font-weight:700;text-decoration:none}
     #leistungen article>a:hover{text-decoration:underline;text-underline-offset:4px}
-    @media(max-width:767px){#leistungen{padding-top:64px!important;padding-bottom:72px!important}#leistungen>div>div:nth-child(2){grid-template-columns:1fr;gap:24px}#leistungen article{border-radius:10px!important}#leistungen article h3{margin-top:18px!important}}
+    #leistungen article:first-child{grid-column:auto!important;grid-row:auto!important;min-height:0!important}
+    #leistungen>div>div:nth-child(2){grid-auto-rows:1fr}
+    @media(max-width:767px){#leistungen{padding-top:64px!important;padding-bottom:72px!important}#leistungen>div>div:nth-child(2){grid-template-columns:1fr;gap:24px}#leistungen article{height:100%!important;border-radius:10px!important}#leistungen article h3{margin-top:18px!important}}
   </style>
 <body class="antialiased">
   <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-3 focus:text-white">Zum Inhalt springen</a>
