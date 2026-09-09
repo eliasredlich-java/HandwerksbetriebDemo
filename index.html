@@ -165,6 +165,22 @@
       #top>div.relative>div.mt-20>div:nth-child(2){grid-row:6!important;margin-top:1rem!important}
     }
     @media(min-width:768px){#top>div.relative>div.mt-20>div:first-child{display:grid!important;grid-template-columns:repeat(3,minmax(max-content,1fr));gap:2rem!important;align-items:start}}
+    /* Services feature grid: high contrast, real craft imagery, compact content. */
+    #leistungen{background:#0f172a!important;color:#f8fafc!important;background-image:none!important;padding-top:88px!important;padding-bottom:96px!important}
+    #leistungen>div{width:min(1180px,100%);margin-inline:auto}
+    #leistungen>div>div:first-child{align-self:center}
+    #leistungen>div>div:first-child>p:not(.text-xs){color:#e2e8f0!important;max-width:38ch;line-height:1.65}
+    #leistungen h2,#leistungen h3{color:#f8fafc!important}
+    #leistungen>div>div:first-child>a[href="#anfrage"]{display:inline-flex;align-items:center;gap:10px;margin-top:28px;padding:12px 24px;border:0;border-radius:6px;background:var(--rust);color:#fff;text-decoration:none;box-shadow:0 6px 16px rgba(0,0,0,.18);font-weight:700}
+    #leistungen>div>div:nth-child(2){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:start}
+    #leistungen article{display:flex;min-width:0;height:auto!important;min-height:0!important;flex-direction:column;align-items:stretch;overflow:hidden;padding:0 0 24px!important;border:0!important;border-radius:12px!important;background:#fff!important;box-shadow:0 4px 20px rgba(0,0,0,.12)!important;color:#1e293b!important}
+    #leistungen article>img{display:block;width:100%;height:auto;aspect-ratio:16 / 9;object-fit:cover;border-radius:12px 12px 0 0}
+    #leistungen article>svg{display:none!important}
+    #leistungen article h3{margin:20px 22px 0!important;color:#0f172a!important;font-size:1.3rem;line-height:1.15}
+    #leistungen article p{margin:10px 22px 0!important;color:#334155!important;font-size:.95rem;line-height:1.55}
+    #leistungen article>a{display:inline-flex;align-items:center;gap:6px;margin:18px 22px 0;color:var(--rust);font-size:.84rem;font-weight:700;text-decoration:none}
+    #leistungen article>a:hover{text-decoration:underline;text-underline-offset:4px}
+    @media(max-width:767px){#leistungen{padding-top:64px!important;padding-bottom:72px!important}#leistungen>div>div:nth-child(2){grid-template-columns:1fr;gap:24px}#leistungen article{border-radius:10px!important}#leistungen article h3{margin-top:18px!important}}
   </style>
 <body class="antialiased">
   <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-3 focus:text-white">Zum Inhalt springen</a>
@@ -239,6 +255,23 @@ document.querySelectorAll('input[name="roof"]').forEach(input=>{const icons=inpu
         '„Die Mannschaft hat jeden Tag sauber aufgeräumt. Am Ende war nicht nur das Dach ordentlich, sondern auch die Baustelle.“'
       ];
       document.querySelectorAll('.reviews-section blockquote').forEach((quote,index)=>{if(reviews[index])quote.textContent=reviews[index]});
+    })();
+  </script>
+  <script>
+    (()=>{
+      const cards=[
+        ['https://images.unsplash.com/photo-1598902108854-10e335adac99?auto=format&fit=crop&w=600&q=80','Neues Ziegeldach in Hamburg','Ziegel, Dachstuhl und maßgeschneiderte Detailanschlüsse für Wohnhäuser mit Charakter.','Steildach-Sanierung anfragen →'],
+        ['https://images.unsplash.com/photo-1628744876497-eb30460be9f6?auto=format&fit=crop&w=600&q=80','Ausgeführte Flachdach-Abdichtung','Dichte, langlebige Abdichtungssysteme für Gewerbeobjekte, Garagen und Anbauten.','Flachdach prüfen lassen →'],
+        ['https://images.unsplash.com/photo-1508873696983-2df515122519?auto=format&fit=crop&w=600&q=80','Dachdämmung und Solarglas','Energetische Dachdämmung und Belüftung, die Heizkosten spürbar senken.','Fördercheck starten →']
+      ];
+      document.querySelectorAll('#leistungen article').forEach((card,index)=>{
+        const data=cards[index];if(!data)return;
+        const image=document.createElement('img');image.src=data[0];image.alt=data[1];image.width=600;image.height=338;image.loading='lazy';card.prepend(image);
+        const heading=card.querySelector('h3');if(heading)heading.textContent=index===2?'Energie & Dämmung':index===1?'Flachdach':'Steildach';
+        const paragraph=card.querySelector('p');if(paragraph)paragraph.textContent=data[2];
+        const oldLabel=card.querySelector(':scope > span:last-child');if(oldLabel)oldLabel.remove();
+        const link=document.createElement('a');link.href='#anfrage';link.textContent=data[3];card.append(link);
+      });
     })();
   </script>
 </body>
