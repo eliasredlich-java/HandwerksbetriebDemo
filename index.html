@@ -100,6 +100,49 @@
     @media(max-width:767px){#top>div.relative{align-items:stretch}#top>div.relative h1{max-width:9ch;font-size:3.4rem!important}#top>div.relative p.reveal.mt-7{margin-top:22px;font-size:1rem;line-height:1.55}#top>div.relative .reveal.mt-9{margin-top:24px}#leistungen article{padding:18px!important}}
     @media(min-width:768px) and (max-width:1023px){#top>div.relative h1{max-width:11ch}#leistungen article{padding:20px!important}}
     @media(max-width:767px){#top>div.relative h1{font-size:1.8rem!important;max-width:16ch!important;margin-top:16px!important}#top>div.relative p.reveal.mt-7{margin-top:14px!important;font-size:.95rem!important;line-height:1.45!important}#top>div.relative .reveal.mt-9{margin-top:18px!important}}
+    /* Hero rail: reuse the existing buttons, stats and quality badge without changing their hooks. */
+    #top>div.relative{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto;align-content:center;align-items:center;column-gap:1.5rem;row-gap:0}
+    #top>div.relative>div:first-child,#top>div.relative>div.mt-20{display:contents!important}
+    #top>div.relative>div:first-child>div:first-child{grid-column:1;grid-row:1}
+    #top>div.relative>div:first-child>p:nth-child(2){grid-column:2;grid-row:1;margin:0!important}
+    #top>div.relative h1{grid-column:1 / -1;grid-row:2}
+    #top>div.relative>div:first-child>p.reveal.mt-7{grid-column:1 / -1;grid-row:3}
+    #top>div.relative>div:first-child>.reveal.mt-9{grid-column:1;grid-row:4;margin-top:2rem!important;margin-bottom:2.5rem!important}
+    #top>div.relative>div.mt-20>div:first-child{grid-column:2;grid-row:4;display:flex;flex-wrap:nowrap;align-items:center;gap:1.5rem;min-width:0;margin-top:2rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.25);color:#fff}
+    #top>div.relative>div.mt-20>div:first-child span{display:flex;flex-direction:column;min-width:max-content;white-space:nowrap;font-size:.8rem;line-height:1.25}
+    #top>div.relative>div.mt-20>div:first-child span::first-line{font-weight:600}
+    #top>div.relative>div.mt-20>div:nth-child(2){grid-column:3;grid-row:4;align-self:center;margin-top:2rem;padding:10px 14px!important}
+    @media(max-width:767px){
+      #top>div.relative{display:grid!important;grid-template-columns:1fr;align-content:center;gap:0}
+      #top>div.relative>div:first-child>div:first-child,#top>div.relative>div:first-child>p:nth-child(2),#top>div.relative h1,#top>div.relative>div:first-child>p.reveal.mt-7,#top>div.relative>div:first-child>.reveal.mt-9,#top>div.relative>div.mt-20>div:first-child,#top>div.relative>div.mt-20>div:nth-child(2){grid-column:1;grid-row:auto}
+      #top>div.relative>div:first-child>div:first-child{margin:0!important}
+      #top>div.relative>div:first-child>p:nth-child(2){margin-top:8px!important}
+      #top>div.relative>div:first-child>.reveal.mt-9{width:100%;margin-top:1.25rem!important;margin-bottom:0!important;gap:.75rem}
+      #top>div.relative>div:first-child>.reveal.mt-9 a{width:100%;min-height:48px}
+      #top>div.relative>div.mt-20>div:first-child{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem;width:100%;margin-top:1.25rem;padding-top:1rem;text-align:center}
+      #top>div.relative>div.mt-20>div:first-child span{min-width:0;white-space:normal;font-size:.72rem;line-height:1.2}
+      #top>div.relative>div.mt-20>div:nth-child(2){display:block!important;width:max-content;max-width:100%;margin-top:1.25rem;padding:8px 12px!important;text-align:center}
+    }
+    #top>div.relative>div.mt-20>div:first-child>span{width:auto!important;height:auto!important;min-width:max-content;display:block;line-height:1.25}
+    #top>div.relative>div.mt-20>div:first-child>span{font-size:0!important;text-align:left}
+    #top>div.relative>div.mt-20>div:first-child>span::before{display:block;color:#fff;font-family:'Barlow',sans-serif;font-size:1.25rem;font-weight:700;line-height:1}
+    #top>div.relative>div.mt-20>div:first-child>span::after{display:block;margin-top:4px;color:rgba(255,255,255,.72);font-size:.72rem;font-weight:400;line-height:1.2}
+    #top>div.relative>div.mt-20>div:first-child>span:nth-child(1)::before{content:'25+'}
+    #top>div.relative>div.mt-20>div:first-child>span:nth-child(1)::after{content:'Jahre Erfahrung'}
+    #top>div.relative>div.mt-20>div:first-child>span:nth-child(2)::before{content:'5'}
+    #top>div.relative>div.mt-20>div:first-child>span:nth-child(2)::after{content:'Jahre Garantie'}
+    #top>div.relative>div.mt-20>div:first-child>span:nth-child(3)::before{content:'350+'}
+    #top>div.relative>div.mt-20>div:first-child>span:nth-child(3)::after{content:'Projekte'}
+    @media(min-width:768px) and (max-width:1023px){
+      #top>div.relative{grid-template-columns:1fr;align-content:center}
+      #top>div.relative>div:first-child>div:first-child,#top>div.relative>div:first-child>p:nth-child(2),#top>div.relative h1,#top>div.relative>div:first-child>p.reveal.mt-7,#top>div.relative>div:first-child>.reveal.mt-9,#top>div.relative>div.mt-20>div:first-child,#top>div.relative>div.mt-20>div:nth-child(2){grid-column:1;grid-row:auto}
+      #top>div.relative h1{font-size:clamp(1.75rem,5vw,2.5rem)!important}
+      #top>div.relative>div:first-child>.reveal.mt-9{width:100%;margin-top:1.25rem!important;margin-bottom:0!important}
+      #top>div.relative>div:first-child>.reveal.mt-9 a{min-height:48px}
+      #top>div.relative>div.mt-20>div:first-child{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;width:100%;margin-top:1.25rem;padding-top:1rem;text-align:center}
+      #top>div.relative>div.mt-20>div:first-child>span{min-width:0;white-space:normal;text-align:center}
+      #top>div.relative>div.mt-20>div:nth-child(2){display:block!important;width:max-content;max-width:100%;margin-top:1.25rem;padding:8px 12px!important;text-align:center}
+    }
   </style>
 <body class="antialiased">
   <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-3 focus:text-white">Zum Inhalt springen</a>
