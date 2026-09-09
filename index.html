@@ -11,10 +11,10 @@
     <title>Nordkante Dachwerk | Dacharbeiten in Hamburg</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" as="style">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>tailwind.config={theme:{extend:{colors:{ink:'#182329',rust:'#c94f35',lime:'#d9f25b',paper:'#f5f3ee',line:'#d9ded9'},fontFamily:{sans:['DM Sans','sans-serif'],display:['Space Grotesk','sans-serif']}}}}</script>
+  <script>tailwind.config={theme:{extend:{colors:{ink:'#252a28',rust:'#9f3d2f',lime:'#d8c46a',paper:'#f2eee7',line:'#d8d0c3'},fontFamily:{sans:['Source Sans 3','sans-serif'],display:['Barlow','sans-serif']}}}}</script>
   <style>
     :root{color-scheme:light;--ink:#19272b;--rust:#b9432f;--lime:#d9f25b;--paper:#f3f0e9;--line:#d7d4ca}*{box-sizing:border-box}html{scroll-behavior:smooth}body{background:var(--paper);font-family:'Plus Jakarta Sans',sans-serif}[hidden]{display:none!important}.focus-ring:focus-visible,a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--lime);outline-offset:3px}.step-panel[hidden],.success-panel[hidden],.mobile-menu[hidden]{display:none}.service-grid{display:grid;grid-template-columns:1.1fr .9fr}.service-grid article:first-child{grid-row:span 2;min-height:610px}.service-grid article:first-child h3{margin-top:360px}.service-grid article img{height:100%;object-fit:cover}.service-grid article{position:relative;overflow:hidden}.service-grid article>div{position:relative;z-index:1}.service-grid article:first-child:after{position:absolute;inset:0;background:linear-gradient(0deg,rgba(24,35,41,.94),rgba(24,35,41,.12) 75%);content:''}.reference-facts{display:grid;grid-template-columns:1fr 1fr;gap:14px}.mobile-menu{transition:max-height .25s ease}.modal{background:rgba(24,35,41,.78)}[aria-invalid="true"]{border:2px solid var(--rust)!important}@media(max-width:767px){.service-grid{grid-template-columns:1fr}.service-grid article:first-child{grid-row:auto;min-height:430px}.service-grid article:first-child h3{margin-top:230px}.reference-facts{gap:8px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
   body{overflow-x:hidden}.modal[hidden]{display:none!important}.sticky-call-bar{display:none}@media(max-width:767px){.sticky-call-bar{position:fixed;right:0;bottom:0;left:0;z-index:40;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px;background:rgba(25,39,43,.97);box-shadow:0 -8px 24px rgba(25,39,43,.18)}.sticky-call-bar a{min-height:46px;padding:10px 8px;text-align:center;font-size:.72rem;font-weight:700;text-decoration:none}.sticky-call-bar .call{background:var(--rust);color:#fff}.sticky-call-bar .request{background:var(--lime);color:var(--ink)}body{padding-bottom:62px}}
@@ -34,6 +34,72 @@
   #referenz+section,#referenz+section.reviews-section{background:#fff!important;color:#1c1917}#referenz+section figure{background:#f8f9fa;border-color:rgba(0,0,0,.06);color:#1c1917}#referenz+section blockquote{color:#374151}#referenz+section .trust-badge{background:#fff}
   #anfrage,#bewerbung{background:#f3f4f6}#anfrage>div>div:nth-child(2){background:#fff;border-color:rgba(0,0,0,.06)}#anfrage .choice-list .choice{background:#fff;border-color:#e5e7eb;transition:background-color .2s ease,border-color .2s ease,transform .2s ease,box-shadow .2s ease}#anfrage .choice-list .choice:hover,#anfrage .choice-list .choice:has(input:checked){border-color:var(--rust);background:#fff;border-color:var(--rust)}#anfrage input,#anfrage select,#anfrage textarea{background:#fff;border-color:#d1d5db;transition:background-color .2s ease,border-color .2s ease}#bewerbung{color:#111827}
   #leistungen a,#anfrage button,#bewerbung a,.button{transition:background-color .2s ease,border-color .2s ease,color .2s ease,transform .2s ease,box-shadow .2s ease}#anfrage{color:#111827}body footer,body footer.bg-ink{background:#0f172a!important;color:#fff}
+    /* Nordkante art direction: Hamburg brick, timber and slate rather than SaaS blue. */
+    :root{--ink:#252a28;--rust:#9f3d2f;--lime:#d8c46a;--paper:#f2eee7;--line:#d8d0c3;--wood:#5b4638;--slate:#303b3b}
+    body{background:var(--paper);color:var(--ink);font-family:'Source Sans 3',sans-serif;font-size:17px;letter-spacing:.005em}
+    h1,h2,h3,h4,.font-display{font-family:'Barlow',sans-serif;letter-spacing:-.025em}
+    h1{font-weight:600!important}p{line-height:1.65}
+    #top{background:var(--slate)}#top .hero-bg{filter:saturate(.72) contrast(1.04)}
+    #top>div:nth-of-type(2){background:linear-gradient(90deg,rgba(37,42,40,.96),rgba(37,42,40,.68) 52%,rgba(37,42,40,.16))}
+    #top>div:nth-of-type(3){background:linear-gradient(0deg,rgba(37,42,40,.9),transparent 62%)}
+    #top .bg-rust,#anfrage .bg-rust,.sticky-call-bar .call{background:var(--rust)!important}
+    #top .text-lime,#referenz .text-lime{color:var(--lime)!important}#top .bg-lime,.sticky-call-bar .request{background:var(--lime)!important}
+    #top .rounded-full{border-radius:2px}#top .reveal:first-of-type{background:rgba(37,42,40,.52);border-color:rgba(216,196,106,.55);letter-spacing:.1em}
+    #top .reveal:first-of-type span{background:var(--lime)}
+    #leistungen,#anfrage{background-color:var(--paper)!important;background-image:repeating-linear-gradient(0deg,rgba(91,70,56,.025) 0,rgba(91,70,56,.025) 1px,transparent 1px,transparent 5px)}
+    #leistungen article,#anfrage .request-card,#anfrage .meister-card,#main-content>section.border-b.border-line.bg-white figure{border-radius:2px;box-shadow:0 8px 24px rgba(55,42,31,.07)}
+    #leistungen article{border-color:var(--line);background:#fbfaf7}#leistungen article>svg{border-radius:2px;background:#eee4da;stroke:var(--rust)}
+    #leistungen article>span:last-child{border-radius:2px;background:#e8e0d5;color:var(--wood)}#referenz,body footer,body footer.bg-ink{background:var(--slate)!important}
+    #referenz .showcase-final-facts>div{background:rgba(216,196,106,.1);border-color:rgba(216,196,106,.36)}
+    #referenz .showcase-final-facts strong,.showcase-fact strong{color:var(--lime);font-family:'Barlow',sans-serif}
+    #main-content>section.border-b.border-line.bg-white{background:#fbfaf7!important}#main-content>section.border-b.border-line.bg-white .trust-badge{border-radius:2px;border-color:var(--line);box-shadow:none}
+    #main-content>section.border-b.border-line.bg-white .trust-badge .stars{color:var(--rust)}#main-content>section.border-b.border-line.bg-white .trust-review-button{border-radius:2px;color:var(--rust)}
+    #anfrage .choice-list .choice{border-radius:2px;background:#fbfaf7;box-shadow:0 4px 12px rgba(55,42,31,.04)}#anfrage .choice-list .choice:hover,#anfrage .choice-list .choice:has(input:checked){background:#f5e9e2;border-color:var(--rust)}
+    #anfrage .choice-list .choice .choice-icon{border-radius:2px;background:#eee4da;color:var(--rust)}#anfrage #next-button,#anfrage #submit-button{border-radius:2px;background:var(--rust)}
+    .meister-card-badge{border-radius:2px!important;background:rgba(37,42,40,.92)!important;letter-spacing:.02em!important}.showcase-final h2{font-family:'Barlow',sans-serif;letter-spacing:-.025em}
+    .showcase-final-facts>div,.showcase-fact{border-radius:2px}@media(max-width:767px){body{font-size:16px}.showcase-final h2{font-size:2.2rem}}
+    /* Layout correction: the hero content owns its flow; only the photo treatment stays absolute. */
+    #top>div.relative{z-index:2;display:flex;align-items:flex-end;min-height:inherit}
+    #top>div.relative>div{display:flex;flex-direction:column;align-items:flex-start;width:100%}
+    #top>div.relative h1{position:relative;z-index:2;margin-top:0;margin-bottom:0;max-width:10ch}
+    #top>div.relative h1 .text-lime{display:inline;color:var(--lime)}
+    #top>div.relative p.reveal.mt-7{position:relative;z-index:2;margin-top:28px;margin-bottom:0;max-width:39rem}
+    #top>div.relative .reveal.mt-9{position:relative;z-index:2;margin-top:30px;margin-bottom:0}
+    #top>div:nth-of-type(2){z-index:1;background:rgba(37,42,40,.72)!important}
+    #top>div:nth-of-type(3){z-index:1;background:linear-gradient(0deg,rgba(37,42,40,.94),rgba(37,42,40,.3) 70%,transparent)!important}
+    #top h1 span.text-lime{display:inline!important;width:auto!important;height:auto!important;position:static!important;margin:0!important;padding:0!important;background:transparent!important;background-color:transparent!important;color:var(--lime)!important}
+    /* Compact first viewport: hero copy stays in normal document flow. */
+    #top{min-height:min(790px,100svh)!important}
+    #top>div.relative{min-height:min(790px,100svh)!important;padding-top:108px!important;padding-bottom:34px!important}
+    #top>div.relative>div{display:grid!important;grid-template-columns:auto auto;align-content:center;align-items:center;column-gap:16px;row-gap:0}
+    #top>div.relative>div>div:first-child,#top>div.relative>div>p:nth-child(2){grid-row:1;margin:0!important;align-self:center}
+    #top>div.relative>div>div:first-child{display:inline-flex;min-height:28px;padding:5px 9px!important;font-size:.68rem;letter-spacing:.08em}
+    #top>div.relative>div>div:first-child span{width:6px;height:6px}
+    #top>div.relative>div>p:nth-child(2){font-size:.68rem;letter-spacing:.1em;white-space:nowrap}
+    #top>div.relative h1{grid-column:1 / -1;grid-row:2;max-width:18ch!important;margin:18px 0 0!important;font-size:clamp(2.5rem,3.35vw,3rem)!important;line-height:1.04!important;letter-spacing:-.025em!important}
+    #top>div.relative p.reveal.mt-7{grid-column:1 / -1;grid-row:3;margin-top:14px!important;max-width:42rem;font-size:1rem;line-height:1.45}
+    #top>div.relative .reveal.mt-9{grid-column:1 / -1;grid-row:4;margin-top:18px!important}
+    @media(max-width:767px){
+      #top,#top>div.relative{min-height:min(720px,100svh)!important}
+      #top>div.relative{padding-top:88px!important;padding-bottom:24px!important}
+      #top>div.relative>div{grid-template-columns:1fr;align-content:center;row-gap:0}
+      #top>div.relative>div>div:first-child,#top>div.relative>div>p:nth-child(2){grid-row:auto;grid-column:1}
+      #top>div.relative>div>div:first-child{width:max-content;max-width:100%;font-size:.62rem}
+      #top>div.relative>div>p:nth-child(2){margin-top:8px!important;font-size:.62rem;white-space:normal}
+      #top>div.relative h1{grid-row:auto;grid-column:1;max-width:16ch!important;margin-top:16px!important;font-size:1.8rem!important;line-height:1.08!important}
+      #top>div.relative p.reveal.mt-7{grid-row:auto;grid-column:1;margin-top:14px!important;font-size:.95rem;line-height:1.45}
+      #top>div.relative .reveal.mt-9{grid-row:auto;grid-column:1;margin-top:18px!important}
+    }
+    #leistungen>div>div:first-child>p:not(.text-xs),#leistungen article p{color:#263238!important}
+    #leistungen>div>div:nth-child(2){align-self:start}
+    #leistungen article{height:auto;min-height:0!important;padding:20px 22px!important;border-radius:3px!important;box-shadow:0 5px 16px rgba(55,42,31,.06)!important}
+    #leistungen article>svg{width:38px!important;height:38px!important;padding:8px!important;border:1px solid rgba(159,61,47,.28);border-radius:3px!important;background:#f1e5db!important;stroke:var(--rust)!important;stroke-width:1.7!important}
+    #leistungen article h3{margin-top:18px!important}
+    #leistungen article p{margin-top:8px!important;line-height:1.5!important}
+    #leistungen article>span:last-child{margin-top:18px!important;padding:3px 7px!important;border:1px solid var(--line);border-radius:2px!important;background:transparent!important;color:#5b4638!important;font-size:.66rem!important;letter-spacing:.1em!important}
+    @media(max-width:767px){#top>div.relative{align-items:stretch}#top>div.relative h1{max-width:9ch;font-size:3.4rem!important}#top>div.relative p.reveal.mt-7{margin-top:22px;font-size:1rem;line-height:1.55}#top>div.relative .reveal.mt-9{margin-top:24px}#leistungen article{padding:18px!important}}
+    @media(min-width:768px) and (max-width:1023px){#top>div.relative h1{max-width:11ch}#leistungen article{padding:20px!important}}
+    @media(max-width:767px){#top>div.relative h1{font-size:1.8rem!important;max-width:16ch!important;margin-top:16px!important}#top>div.relative p.reveal.mt-7{margin-top:14px!important;font-size:.95rem!important;line-height:1.45!important}#top>div.relative .reveal.mt-9{margin-top:18px!important}}
   </style>
 <body class="antialiased">
   <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-3 focus:text-white">Zum Inhalt springen</a>
@@ -89,5 +155,25 @@ document.querySelectorAll('input[name="roof"]').forEach(input=>{const icons=inpu
 (()=>{const section=document.querySelector('#referenz');const grid=section?.querySelector('.mx-auto.grid');const comparison=section?.querySelector('#comparison');const copy=section?.querySelector('.showcase-copy');if(!section||!grid||!comparison||!copy)return;const left=grid.querySelector('.showcase-left')||document.createElement('div');left.className='showcase-left';if(!left.parentElement)grid.insertBefore(left,grid.firstElementChild);left.replaceChildren(comparison);copy.className='showcase-copy showcase-final';copy.innerHTML='<h2 class="display">Ergebnisse, die für sich sprechen.</h2><p class="showcase-lead">Komplettsanierung eines Hamburger Kaffeemühlenhauses. Ein neues gedämmtes Steildach mit Braas Tondachziegeln senkt den Wärmeverlust spürbar und schützt den Altbau dauerhaft.</p><div class="showcase-final-facts" aria-label="Projektkennzahlen"><div><strong>18 Arbeitstage</strong><span>Bauzeit</span></div><div><strong>42 %</strong><span>weniger Wärmeverlust</span></div></div><ul class="showcase-checklist" aria-label="Ausgeführte Arbeiten"><li>Braas Tondachziegel</li><li>Aufsparrendämmung WLG 023</li><li>Neue Anschlüsse an Gauben und Schornstein</li><li>10 Jahre Garantie</li></ul>';})();
 (()=>{const grid=document.querySelector('#referenz>.mx-auto.grid');const left=grid?.querySelector('.showcase-left');const right=grid?.querySelector('.showcase-final');const facts=right?.querySelector('.showcase-final-facts');if(grid&&left&&right&&facts){left.append(facts);right.querySelector('.showcase-final-facts')?.remove()}})();
 </script>
+  <script>
+    (()=>{
+      const setText=(selector,text)=>{const element=document.querySelector(selector);if(element)element.textContent=text};
+      setText('#top .reveal:first-of-type','Heute erreichbar: Notdienst für Hamburg');
+      const heroTitle=document.querySelector('#top h1');if(heroTitle)heroTitle.innerHTML='Dächer für Hamburg. <span class="text-lime">Sauber gemacht.</span>';
+      setText('#top p.reveal.mt-7','Wir reparieren, sanieren und dämmen Dächer in Hamburg. Sie bekommen einen festen Ansprechpartner und eine Baustelle, die ordentlich übergeben wird.');
+      setText('#leistungen h2','Dacharbeit, die man später nicht erklären muss.');
+      setText('#leistungen > div > div:first-child > p:not(.text-xs)','Wir schauen uns den Bestand an, sprechen Klartext und halten die Baustelle sauber. Von der kleinen Reparatur bis zur kompletten Neueindeckung.');
+      setText('#referenz h2','Kaffeemühlenhaus, neues Dach.');
+      setText('#referenz .showcase-lead','Energetische Dachsanierung und Neueindeckung eines Hamburger Kaffeemühlenhauses in Eimsbüttel. Neue Ziegel, eine Aufsparrendämmung und saubere Zinkanschlüsse machen das Dach wieder dicht und alltagstauglich.');
+      setText('#anfrage h2','Erst anschauen, dann anbieten.');
+      setText('#anfrage>div>div:first-child>p:not(.text-xs)','Schildern Sie uns kurz, was am Dach los ist. Wir melden uns mit einem realistischen nächsten Schritt und einem festen Ansprechpartner.');
+      const reviews=[
+        '„Der Termin wurde eingehalten, der Ansprechpartner war immer erreichbar und die Rechnung entsprach dem Angebot. So sollte es sein.“',
+        '„Nach dem Sturm war am selben Abend jemand da. Das Leck war dicht, und die nächsten Schritte wurden offen erklärt.“',
+        '„Die Mannschaft hat jeden Tag sauber aufgeräumt. Am Ende war nicht nur das Dach ordentlich, sondern auch die Baustelle.“'
+      ];
+      document.querySelectorAll('.reviews-section blockquote').forEach((quote,index)=>{if(reviews[index])quote.textContent=reviews[index]});
+    })();
+  </script>
 </body>
 </html>
