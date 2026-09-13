@@ -584,7 +584,7 @@
     transition:border-color var(--t) var(--ease-out);
   }
   .team-card img{
-    display:block;width:100%;aspect-ratio:4/5;object-fit:cover;
+    display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top center;
     filter:saturate(.72) brightness(.86) contrast(1.04);
     transition:transform var(--t-slow) var(--ease-out),filter var(--t-slow) var(--ease-out);
   }
@@ -886,17 +886,26 @@
     .google-reviews-grid{grid-template-columns:1fr;gap:1rem;margin-top:1.75rem}
     .google-reviews-head{gap:.5rem .875rem}
 
+    /* Referenz kompakt: Bild, Kennzahlen (2 Spalten), Kernpunkte ohne Luftpolster */
     #comparison{aspect-ratio:4/3}
-    .showcase-final,#referenz .flex.flex-col.justify-center{padding:2.75rem 18px}
+    .showcase-final,#referenz .flex.flex-col.justify-center{padding:1.75rem 18px 2.25rem}
+    .showcase-final h2{font-size:clamp(1.65rem,6.5vw,2.1rem)}
+    .showcase-final .showcase-lead{margin-top:.85rem;font-size:.9375rem;line-height:1.55}
+    .showcase-lead-more{display:none}
+    .showcase-checklist{gap:.45rem;margin-top:1.15rem}
+    .showcase-checklist li{font-size:.875rem}
     .showcase-final-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .showcase-final-facts > div{padding:1rem}
+    .showcase-final-facts > div{padding:.85rem 1rem}
     .showcase-final-facts strong{font-size:1.25rem}
+    .showcase-final-facts span{margin-top:.15rem;font-size:.75rem}
 
+    /* Team: Portraits oben verankert, damit Koepfe nie abgeschnitten werden */
     .team-grid{grid-template-columns:1fr;gap:1rem;margin-top:1.75rem}
-    .team-card img{aspect-ratio:16/10}
+    .team-card img{aspect-ratio:5/4;object-fit:cover;object-position:top center}
 
-    .service-area-list{grid-template-columns:repeat(auto-fit,minmax(8.5rem,1fr));gap:.5rem}
-    .service-area-list li{font-size:.8125rem;padding:.5rem .6rem}
+    /* Servicegebiet: Stadtteile als kompakte Pills statt Liste */
+    .service-area-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:1.25rem}
+    .service-area-list li{min-height:40px;padding:.45rem .75rem;font-size:.8125rem}
     .service-area-map iframe{height:17rem}
     .service-area-badge{left:.75rem;top:.75rem;padding:.65rem .8rem;font-size:.75rem}
 
@@ -930,10 +939,10 @@
   }
 
   @media (max-width:400px){
-    .service-area-list{grid-template-columns:1fr}
     h1,#top .hero-content h1{font-size:clamp(1.7rem,8vw,2.1rem)}
     .showcase-final h2,h2{font-size:clamp(1.6rem,7.5vw,2rem)}
-    .showcase-final-facts{grid-template-columns:1fr}
+    .showcase-final-facts > div{padding:.75rem .8rem}
+    .showcase-final-facts strong{font-size:1.1rem}
   }
 
   /* --- 23. Druck ---------------------------------------------------------- */
@@ -1071,7 +1080,7 @@ document.querySelectorAll('input[name="roof"]').forEach(input=>{const icons=inpu
       setText('#leistungen h2','Dacharbeit, die man später nicht erklären muss.');
       setText('#leistungen > div > div:first-child > p:not(.text-xs)','Wir schauen uns den Bestand an, sprechen Klartext und halten die Baustelle sauber. Von der kleinen Reparatur bis zur kompletten Neueindeckung.');
       setText('#referenz h2','Kaffeemühlenhaus, neues Dach.');
-      setText('#referenz .showcase-lead','Energetische Dachsanierung und Neueindeckung eines Hamburger Kaffeemühlenhauses in Eimsbüttel. Neue Ziegel, eine Aufsparrendämmung und saubere Zinkanschlüsse machen das Dach wieder dicht und alltagstauglich.');
+      (()=>{const lead=document.querySelector('#referenz .showcase-lead');if(lead)lead.innerHTML='Energetische Dachsanierung und Neueindeckung eines Hamburger Kaffeemühlenhauses in Eimsbüttel. <span class="showcase-lead-more">Neue Ziegel, eine Aufsparrendämmung und saubere Zinkanschlüsse machen das Dach wieder dicht und alltagstauglich.</span>'})();
       setText('#anfrage h2','Erst anschauen, dann anbieten.');
       setText('#anfrage>div>div:first-child>p:not(.text-xs)','Schildern Sie uns kurz, was am Dach los ist. Wir melden uns mit einem realistischen nächsten Schritt und einem festen Ansprechpartner.');
       const reviews=[
