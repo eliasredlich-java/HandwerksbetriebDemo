@@ -1008,11 +1008,6 @@ body > header{top:var(--demo-bar-h)!important}
   border:1px solid var(--line-strong);border-radius:var(--r);
   filter:saturate(.72) brightness(.88) contrast(1.04);
 }
-.teaser-facts{display:flex;flex-wrap:wrap;gap:.4rem .5rem;list-style:none;margin:0;padding:0}
-.teaser-facts li{
-  padding:.3rem .65rem;border:1px solid var(--line);border-radius:var(--r);
-  color:var(--fg-2);font-size:.8125rem;font-weight:600;line-height:1.4;
-}
 
 /* Linien-Knopf: Flaeche aus der Karte, 1px-Kante, Pfeil rueckt 4px nach rechts */
 .btn-line{
@@ -1030,6 +1025,25 @@ body > header{top:var(--demo-bar-h)!important}
   .btn-line:hover svg{transform:translateX(4px)}
 }
 .footer-jobs-link{font-weight:600;color:var(--fg-2)}
+
+/* Karriere-Teaser: links der Text, rechts ein einziger Messing-Knopf.
+   Keine Badges, kein Stapel — die gefuellte Flaeche ist der Schwerpunkt. */
+.teaser-action{justify-self:end;width:100%;max-width:19rem}
+.btn-solid{
+  display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
+  width:100%;min-height:3.25rem;padding:0 1.5rem;
+  border:1px solid var(--accent);border-radius:var(--r);
+  background:var(--accent);color:var(--accent-ink);
+  font-family:'Barlow',ui-sans-serif,system-ui,sans-serif;
+  font-size:1.0625rem;font-weight:700;letter-spacing:.01em;
+  text-decoration:none;
+  transition:background-color var(--t) var(--ease-out),border-color var(--t) var(--ease-out);
+}
+.btn-solid svg{flex:none;transition:transform var(--t) var(--ease-out)}
+@media (hover:hover) and (pointer:fine){
+  .btn-solid:hover{background:var(--accent-strong);border-color:var(--accent-strong)}
+  .btn-solid:hover svg{transform:translateX(3px)}
+}
 
 /* Notdienst: eigener Knopf. 2px-Messingkante statt Flaeche, Hoerer links,
    Nummer fett. Steht neben dem Primaerweg, ohne mit ihm zu konkurrieren. */
@@ -1051,16 +1065,17 @@ body > header{top:var(--demo-bar-h)!important}
 
 @media (max-width:1023px){
   .teaser-inner{grid-template-columns:1fr;gap:1.5rem;padding:2.75rem 1.25rem}
-  .teaser-aside{justify-self:start;max-width:18rem}
+  .teaser-aside,.teaser-action{justify-self:start;max-width:18rem}
   .teaser-faces img{aspect-ratio:1}
 }
 @media (max-width:767px){
   .teaser-inner{gap:1.25rem;padding:2.25rem 20px}
   /* Mobil: Text, dann drei Gesichter im Fluss, dann Knopf in voller Breite (>= 48px Touch-Ziel) */
   .teaser-aside{max-width:none;gap:1rem}
+  .teaser-action{max-width:none}
   .teaser-faces{display:flex;justify-content:flex-start}
   .teaser-faces li{flex:0 0 4rem}
-  .btn-line{width:100%;min-height:3rem}
+  .btn-line,.btn-solid{width:100%;min-height:3rem}
 }
 
 /* --- 26. Unterseiten: Intro, Fakten, Stellen, Abschluss-CTA -------------- */
