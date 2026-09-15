@@ -1032,8 +1032,8 @@ body > header{top:var(--demo-bar-h)!important}
 .btn-solid{
   display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
   width:100%;min-height:3.25rem;padding:0 1.5rem;
-  border:1px solid var(--accent);border-radius:var(--r);
-  background:var(--accent);color:var(--accent-ink);
+  border:1px solid #D9A74A;border-radius:var(--r);
+  background:#D9A74A;color:var(--accent-ink);
   font-family:'Barlow',ui-sans-serif,system-ui,sans-serif;
   font-size:1.0625rem;font-weight:700;letter-spacing:.01em;
   text-decoration:none;
