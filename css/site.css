@@ -274,20 +274,8 @@ header a[href="#anfrage"]{border-radius:var(--r);letter-spacing:.01em}
   min-height:3.25rem;padding-inline:1.75rem;
   font-size:1rem;letter-spacing:.01em;text-decoration:none;
 }
-#top .hero-emergency{
-  display:inline-flex;align-items:center;min-height:2.75rem;
-  color:var(--fg-2);font-size:.9rem;text-decoration:none;
-}
-#top .hero-emergency strong{
-  margin-left:.35em;color:var(--fg);
-  text-decoration:underline;
-  text-decoration-color:var(--accent-dim);
-  text-underline-offset:.28em;
-  transition:text-decoration-color var(--t) var(--ease-out);
-}
-@media (hover:hover) and (pointer:fine){
-  #top .hero-emergency:hover strong{text-decoration-color:var(--accent)}
-}
+/* Notdienst im Hero: Knopf-Grammatik aus .btn-emergency (Abschnitt 25), hier nur die Hero-Masse */
+#top .hero-emergency{min-height:3.5rem;padding:0 1.35rem;font-size:1rem}
 #top .hero-media{
   position:relative;height:100%;min-height:24rem;
   overflow:hidden;border-radius:var(--r-media);
@@ -531,7 +519,8 @@ header a[href="#anfrage"]{border-radius:var(--r);letter-spacing:.01em}
   transition:border-color var(--t) var(--ease-out);
 }
 .team-card img{
-  display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top center;
+  display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 20%;
+  background:var(--surface-2); /* Flaeche steht, bevor das Foto da ist — kein Layout-Shift */
   filter:saturate(.72) brightness(.86) contrast(1.04);
   transition:transform var(--t-slow) var(--ease-out),filter var(--t-slow) var(--ease-out);
 }
@@ -866,7 +855,7 @@ footer .border-t{border-color:var(--line)}
   #top .hero-bullets{order:6;margin-top:.5rem;width:100%}
   #top .hero-bullets li{font-size:.875rem}
   #top .hero-primary{width:100%;justify-content:center;min-height:3rem}
-  #top .hero-emergency{justify-content:center;min-height:2.5rem}
+  #top .hero-emergency{justify-content:center;min-height:3rem}
 
   /* Bewertungen: Kopf kompakt, Karten als wischbare Reihe */
   .google-reviews-head{gap:.4rem .875rem}
@@ -923,7 +912,6 @@ footer .border-t{border-color:var(--line)}
   }
   .team-grid::-webkit-scrollbar{display:none}
   .team-card{flex:0 0 min(68%,15rem);scroll-snap-align:start}
-  .team-card img{aspect-ratio:1/1;object-fit:cover;object-position:top center}
   .team-card figcaption{padding:.8rem .9rem .95rem}
   .team-card figcaption strong{font-size:.9375rem}
   .team-card figcaption span{font-size:.75rem;line-height:1.35}
@@ -1043,12 +1031,14 @@ body > header{top:var(--demo-bar-h)!important}
 }
 .teaser h2{font-size:clamp(1.5rem,1.15rem + 1.3vw,2.125rem);line-height:1.12}
 .teaser-copy p:not(.text-xs){max-width:54ch}
-.teaser-aside{display:flex;flex-direction:column;align-items:flex-start;gap:1.25rem;justify-self:end}
+.teaser-aside{display:grid;gap:.75rem;justify-self:end;width:100%;max-width:19rem}
+.teaser-aside .btn-line{width:100%}
 
 /* Drei Gesichter als ruhige Reihe — dieselbe Entsaettigung wie die Teamkarten */
-.teaser-faces{display:flex;gap:.5rem;list-style:none;margin:0;padding:0}
+.teaser-faces{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;list-style:none;margin:0;padding:0}
 .teaser-faces img{
-  display:block;width:3.5rem;height:3.5rem;object-fit:cover;object-position:top center;
+  display:block;width:100%;aspect-ratio:1;object-fit:cover;object-position:center 20%;
+  background:var(--surface-2);
   border:1px solid var(--line-strong);border-radius:var(--r);
   filter:saturate(.72) brightness(.88) contrast(1.04);
 }
@@ -1075,14 +1065,36 @@ body > header{top:var(--demo-bar-h)!important}
 }
 .footer-jobs-link{font-weight:600;color:var(--fg-2)}
 
+/* Notdienst: eigener Knopf. 2px-Messingkante statt Flaeche, Hoerer links,
+   Nummer fett. Steht neben dem Primaerweg, ohne mit ihm zu konkurrieren. */
+.btn-emergency{
+  display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
+  min-height:3rem;padding:0 1.25rem;
+  border:2px solid var(--accent);border-radius:var(--r);
+  background:transparent;color:var(--fg);
+  font-family:'Barlow',ui-sans-serif,system-ui,sans-serif;
+  font-size:1rem;font-weight:600;letter-spacing:.01em;line-height:1.2;
+  text-decoration:none;white-space:nowrap;
+}
+.btn-emergency svg{flex:none;color:var(--accent)}
+.btn-emergency strong{font-weight:700;color:var(--fg)}
+@media (hover:hover) and (pointer:fine){
+  .btn-emergency:hover{background:var(--accent-tint);border-color:var(--accent-strong)}
+}
+.footer-emergency{margin-top:1.1rem;min-height:2.75rem;padding:0 1rem;font-size:.9375rem}
+
 @media (max-width:1023px){
   .teaser-inner{grid-template-columns:1fr;gap:1.5rem;padding:2.75rem 1.25rem}
-  .teaser-aside{justify-self:stretch;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:space-between}
+  .teaser-aside{justify-self:start;max-width:18rem}
+  .teaser-faces img{aspect-ratio:1}
 }
 @media (max-width:767px){
   .teaser-inner{gap:1.25rem;padding:2.25rem 20px}
-  .teaser-aside{flex-direction:column;align-items:stretch;gap:1rem}
-  .btn-line{width:100%}
+  /* Mobil: Text, dann drei Gesichter im Fluss, dann Knopf in voller Breite (>= 48px Touch-Ziel) */
+  .teaser-aside{max-width:none;gap:1rem}
+  .teaser-faces{display:flex;justify-content:flex-start}
+  .teaser-faces li{flex:0 0 4rem}
+  .btn-line{width:100%;min-height:3rem}
 }
 
 /* --- 26. Unterseiten: Intro, Fakten, Stellen, Abschluss-CTA -------------- */
@@ -1100,9 +1112,13 @@ body > header{top:var(--demo-bar-h)!important}
   display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;
   margin:2.75rem 0 0;padding:0;list-style:none;
 }
-.about-facts li{padding:1.1rem 1.25rem;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
-.about-facts strong{display:block;font-family:'Barlow',sans-serif;font-size:1.5rem;font-weight:700;line-height:1.1;letter-spacing:-.02em;color:var(--accent)}
-.about-facts span{display:block;margin-top:.3rem;color:var(--fg-3);font-size:.8125rem}
+.about-facts li{
+  padding:1.4rem 1.5rem 1.5rem;
+  border:1px solid var(--line);border-top:3px solid var(--accent);
+  border-radius:0 0 var(--r) var(--r);background:var(--surface);
+}
+.about-facts strong{display:block;font-family:'Barlow',sans-serif;font-size:1.875rem;font-weight:700;line-height:1;letter-spacing:-.02em;color:var(--fg)}
+.about-facts span{display:block;margin-top:.55rem;color:var(--fg-2);font-size:.9375rem;line-height:1.4}
 
 /* Ueber uns: Leitsaetze als zweispaltige Liste mit Messing-Haken */
 .about-values{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem 2.5rem;margin:2rem 0 0;padding:0;list-style:none}
@@ -1158,8 +1174,9 @@ body > header{top:var(--demo-bar-h)!important}
   .page-intro > div,.page-cta > div{padding-inline:20px}
   .page-lead{font-size:1rem;line-height:1.55}
   .about-facts{gap:.6rem;margin-top:1.75rem}
-  .about-facts li{padding:.85rem 1rem}
-  .about-facts strong{font-size:1.25rem}
+  .about-facts li{padding:1rem 1.1rem 1.1rem}
+  .about-facts strong{font-size:1.5rem}
+  .about-facts span{margin-top:.4rem;font-size:.875rem}
   .about-values{grid-template-columns:1fr;gap:.9rem;margin-top:1.5rem}
   .jobs-list{margin-top:1.75rem}
   .jobs-list article{grid-template-columns:1fr;gap:.75rem;padding:1.1rem 0}
@@ -1167,5 +1184,8 @@ body > header{top:var(--demo-bar-h)!important}
   .page-cta > div{padding-block:2.25rem}
   .page-cta-actions{width:100%}
   .page-cta-actions > a{flex:1 1 100%}
-  .btn-accent{width:100%}
+  .btn-accent,.btn-emergency{width:100%}
+}
+@media (max-width:380px){
+  .about-facts{grid-template-columns:1fr;gap:.5rem}
 }
