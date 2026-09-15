@@ -76,10 +76,10 @@ body .border-line{border-color:var(--line)}
 body .divide-line > *{border-color:var(--line)}
 body .bg-line{background-color:var(--line)}
 
-#google-reviews,#team,#servicegebiet,#faq,#bewerbung,.teaser{background:var(--bg)}
+#google-reviews,#team,#servicegebiet,#faq,.teaser{background:var(--bg)}
 #referenz,#anfrage{background:var(--surface)}
 #leistungen{background:var(--bg)}
-#google-reviews,#leistungen,#team,#servicegebiet,#faq,#bewerbung{border-top:1px solid var(--line)}
+#google-reviews,#leistungen,#team,#servicegebiet,#faq{border-top:1px solid var(--line)}
 
 /* --- 4. Typografie ------------------------------------------------------ */
 h1,h2,h3,h4,.font-display{
@@ -168,13 +168,13 @@ a,button,summary,label,input,select,textarea{
 }
 a[href]:active,button:not(:disabled):active{transform:scale(.985)}
 .hero-primary:active,#next-button:active,#submit-button:active,
-#quick-apply-open:active,#quick-apply-form button:active,
+#quick-apply-form button:active,
 .sticky-call-bar a:active,.google-reviews-cta:active{transform:scale(.97)}
 button:disabled{opacity:.4;cursor:not-allowed}
 button:not(:disabled),label[class*="cursor-pointer"]{cursor:pointer}
 
 /* Primaerknopf: Kalkstein-Flaeche, dunkle Schrift */
-.hero-primary,#submit-button,#quick-apply-open,#service-detail-cta,
+.hero-primary,#submit-button,#service-detail-cta,
 #leistungen > div > div:first-child > a[href="#anfrage"],
 #quick-apply-form button[type="submit"],.success-panel a[href^="tel:"]{
   background:var(--accent);
@@ -186,7 +186,7 @@ button:not(:disabled),label[class*="cursor-pointer"]{cursor:pointer}
 #next-button{background:var(--surface-2);color:var(--fg);border:1px solid var(--line-strong);border-radius:var(--r)}
 
 @media (hover:hover) and (pointer:fine){
-  .hero-primary:hover,#submit-button:hover,#quick-apply-open:hover,
+  .hero-primary:hover,#submit-button:hover,
   #service-detail-cta:hover,#quick-apply-form button[type="submit"]:hover,
   #leistungen > div > div:first-child > a[href="#anfrage"]:hover,
   .success-panel a[href^="tel:"]:hover{background:var(--accent-strong)}
@@ -198,12 +198,12 @@ button:not(:disabled),label[class*="cursor-pointer"]{cursor:pointer}
   a[href]:active,button:active{transform:none}
 }
 
-.hero-primary svg,#next-button svg,#quick-apply-open svg,
+.hero-primary svg,#next-button svg,
 #leistungen > div > div:first-child > a[href="#anfrage"] svg{
   transition:transform var(--t) var(--ease-out);
 }
 @media (hover:hover) and (pointer:fine){
-  .hero-primary:hover svg,#next-button:hover svg,#quick-apply-open:hover svg,
+  .hero-primary:hover svg,#next-button:hover svg,
   #leistungen > div > div:first-child > a[href="#anfrage"]:hover svg{transform:translateX(3px)}
 }
 
@@ -709,25 +709,6 @@ label:has(input:checked) .choice-icon{background:var(--accent);color:var(--accen
 .success-panel > div:first-child{border-radius:var(--r);background:var(--accent)!important;color:var(--accent-ink)!important}
 .success-panel a[href^="tel:"]{min-height:3rem;text-decoration:none}
 
-/* --- 18. Karriere ------------------------------------------------------- */
-#bewerbung{border-block:1px solid var(--line)}
-#bewerbung .job-perks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.25rem;margin-top:3rem}
-#bewerbung .job-perk{
-  padding:1.5rem;
-  border:1px solid var(--line);border-radius:var(--r);
-  background:var(--surface);text-align:left;
-}
-#bewerbung .job-perk-icon{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:2.75rem;height:2.75rem;margin-bottom:1rem;
-  border:1px solid var(--accent-line);border-radius:var(--r);
-  background:var(--accent-tint);color:var(--accent);
-}
-#bewerbung .job-perk-icon svg{width:1.375rem;height:1.375rem;stroke-width:1.8}
-#bewerbung .job-perk h3{font-size:1.0625rem}
-#bewerbung .job-perk p{max-width:none;margin-top:.5rem;color:var(--fg-2);font-size:.9rem;line-height:1.6}
-#quick-apply-open{min-height:3.5rem;letter-spacing:.01em;box-shadow:none}
-
 /* --- 19. Footer --------------------------------------------------------- */
 footer{background:var(--bg)!important;color:var(--fg);border-top:1px solid var(--line)}
 footer h2{font-family:'Barlow',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
@@ -816,7 +797,6 @@ footer .border-t{border-color:var(--line)}
   .google-reviews-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .team-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .service-area-grid{grid-template-columns:1fr;gap:2rem}
-  #bewerbung .job-perks{grid-template-columns:repeat(2,minmax(0,1fr))}
   .showcase-final,#referenz .flex.flex-col.justify-center{padding:3rem 2.25rem}
   #referenz > .mx-auto.grid{grid-template-columns:1fr}
 }
@@ -827,22 +807,21 @@ footer .border-t{border-color:var(--line)}
 
   /* Sektionsabstaende: 30-50% weniger Luft als auf dem Desktop. ID-Selektoren
      schlagen die Tailwind-Utilities (py-16/20/24) unabhaengig von der Ladereihenfolge. */
-  #google-reviews > div,#team > div,#servicegebiet > div,#faq > div,#bewerbung > div{padding-block:2.5rem}
+  #google-reviews > div,#team > div,#servicegebiet > div,#faq > div{padding-block:2.5rem}
   #leistungen,#anfrage{padding-block:3rem}
   footer > div{padding-block:2.25rem;gap:1.75rem}
 
   /* Ueberschriften: eine Stufe kleiner, damit weniger Zeilen umbrechen */
   #top .hero-content h1{font-size:clamp(1.75rem,6.8vw,2.25rem)}
-  #google-reviews h2,#leistungen h2,#team h2,#servicegebiet h2,#faq h2,#anfrage h2,#bewerbung h2{
+  #google-reviews h2,#leistungen h2,#team h2,#servicegebiet h2,#faq h2,#anfrage h2{
     font-size:clamp(1.55rem,6.2vw,1.9rem);line-height:1.12;
   }
   #leistungen h2,#anfrage h2{margin-top:.9rem}
-  #team h2,#servicegebiet h2,#faq h2,#bewerbung h2{margin-top:.75rem}
+  #team h2,#servicegebiet h2,#faq h2{margin-top:.75rem}
   #leistungen > div > div:first-child > p:not(.text-xs),
   #anfrage > div > div:first-child > p:not(.text-xs){margin-top:.9rem;font-size:.9375rem;line-height:1.6}
   #team > div > div:first-child > p:not(.text-xs),
   #servicegebiet .service-area-grid p:not(.text-xs),
-  #bewerbung > div > div:first-child > p:not(.text-xs){margin-top:.75rem;font-size:.9375rem;line-height:1.55}
 
   /* Hero: Bild kleiner, Primaer-CTA vor den Bullets — damit er im ersten Screen liegt */
   #top .hero-inner{display:flex;flex-direction:column;align-items:flex-start;gap:1rem;padding:6.25rem 18px 2.25rem}
@@ -937,15 +916,6 @@ footer .border-t{border-color:var(--line)}
   #quote-form label[class*="cursor-pointer"]{padding:.75rem .875rem;min-height:52px}
   #quote-form legend{font-size:1.25rem}
 
-  /* Karriere: Vorteile als kompakte Zeilen (Icon links, Text rechts) */
-  #bewerbung .job-perks{grid-template-columns:1fr;gap:.6rem;margin-top:1.5rem}
-  #bewerbung .job-perk{display:grid;grid-template-columns:2.5rem minmax(0,1fr);column-gap:.9rem;padding:.9rem 1rem}
-  #bewerbung .job-perk-icon{grid-row:1 / span 2;width:2.5rem;height:2.5rem;margin:0}
-  #bewerbung .job-perk-icon svg{width:1.25rem;height:1.25rem}
-  #bewerbung .job-perk h3{grid-column:2;font-size:1rem}
-  #bewerbung .job-perk p{grid-column:2;margin-top:.2rem;font-size:.875rem;line-height:1.5}
-  #bewerbung > div > div.mt-12{margin-top:1.5rem}
-  #quick-apply-open{width:100%;text-align:center;min-height:3rem}
 
   /* Schwebende Kontaktpunkte: eine Leiste statt Leiste + Button. WhatsApp
      wandert in die Sticky-Leiste; der Floating-Button verdeckt so keinen Inhalt. */
@@ -1117,7 +1087,7 @@ body > header{top:var(--demo-bar-h)!important}
 .about-facts span{display:block;margin-top:.55rem;color:var(--fg-2);font-size:.9375rem;line-height:1.4}
 
 /* Stellenliste: eine Zeile pro Stelle, Haarlinien statt Karten */
-.jobs-list{margin-top:2.5rem;border-top:1px solid var(--line)}
+.jobs-list{padding:1.5rem 0 3.5rem}
 .jobs-list article{
   display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem 2rem;align-items:center;
   padding:1.35rem 0;border-bottom:1px solid var(--line);
@@ -1126,7 +1096,7 @@ body > header{top:var(--demo-bar-h)!important}
 .jobs-list .job-meta{display:flex;flex-wrap:wrap;gap:.35rem 1rem;margin:.35rem 0 0;padding:0;list-style:none;color:var(--fg-3);font-size:.875rem}
 .jobs-list .job-meta li + li::before{content:"·";margin-right:1rem;color:var(--line-strong)}
 .jobs-list p{margin-top:.5rem;color:var(--fg-2);font-size:.9375rem}
-.jobs-list .btn-line{min-height:2.75rem;padding-inline:1rem;font-size:.9375rem}
+.jobs-list .btn-line{min-height:2.75rem;padding-inline:1rem;font-size:.9375rem;white-space:nowrap}
 
 /* Abschluss: zurueck zur Anfrage — Messingflaeche fuer den Primaerweg */
 .page-cta{border-top:1px solid var(--line);background:var(--surface)}
@@ -1136,6 +1106,9 @@ body > header{top:var(--demo-bar-h)!important}
 }
 .page-cta h2{font-size:clamp(1.375rem,1.1rem + 1vw,1.875rem)}
 .page-cta p{margin-top:.4rem;color:var(--fg-2)}
+.page-cta-tel{font-weight:700;color:var(--fg);text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:4px;white-space:nowrap}
+.page-cta-link{color:var(--fg);text-decoration:underline;text-decoration-color:var(--line-strong);text-underline-offset:4px}
+@media (hover:hover) and (pointer:fine){.page-cta-tel:hover,.page-cta-link:hover{text-decoration-color:var(--accent-strong)}}
 .page-cta-actions{display:flex;flex-wrap:wrap;gap:.75rem}
 .btn-accent{
   display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
@@ -1163,10 +1136,10 @@ body > header{top:var(--demo-bar-h)!important}
   .page-intro > div,.page-cta > div{padding-inline:20px}
   .page-lead{font-size:1rem;line-height:1.55}
   .about-facts{gap:.6rem;margin-top:1.75rem}
-  .about-facts li{padding:1rem 1.1rem 1.1rem}
-  .about-facts strong{font-size:1.5rem}
+  .about-facts li{padding:.9rem 1rem 1rem}
+  .about-facts strong{font-size:1.375rem}
   .about-facts span{margin-top:.4rem;font-size:.875rem}
-  .jobs-list{margin-top:1.75rem}
+  .jobs-list{padding:.75rem 0 2.5rem}
   .jobs-list article{grid-template-columns:1fr;gap:.75rem;padding:1.1rem 0}
   .jobs-list .btn-line{width:100%}
   .page-cta > div{padding-block:2.25rem}
