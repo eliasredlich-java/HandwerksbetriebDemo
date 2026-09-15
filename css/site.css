@@ -1066,6 +1066,7 @@ body > header{top:var(--demo-bar-h)!important}
 /* --- 26. Unterseiten: Intro, Fakten, Stellen, Abschluss-CTA -------------- */
 .page-intro{padding:8.5rem 0 2.5rem;border-bottom:1px solid var(--line)}
 .page-intro > div{max-width:80rem;margin-inline:auto;padding-inline:1.25rem}
+.page-intro--compact{padding-bottom:1.75rem} /* Karriere: Stellen folgen direkt auf die Subline */
 .page-intro h1{max-width:22ch;margin:0;font-size:clamp(2.25rem,1.55rem + 2.7vw,3.4rem);line-height:1.05;letter-spacing:-.03em} /* Klassen-Spezifitaet: schlaegt Tailwinds h1-Reset */
 .page-lead{max-width:60ch;margin-top:1.25rem;color:var(--fg-2);font-size:1.125rem;line-height:1.6}
 .breadcrumb{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1.5rem;padding:0;list-style:none;color:var(--fg-3);font-size:.875rem}
@@ -1087,7 +1088,7 @@ body > header{top:var(--demo-bar-h)!important}
 .about-facts span{display:block;margin-top:.55rem;color:var(--fg-2);font-size:.9375rem;line-height:1.4}
 
 /* Stellenliste: eine Zeile pro Stelle, Haarlinien statt Karten */
-.jobs-list{padding:1.5rem 0 3.5rem}
+.jobs-list{padding:.5rem 0 3.5rem}
 .jobs-list article{
   display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem 2rem;align-items:center;
   padding:1.35rem 0;border-bottom:1px solid var(--line);
@@ -1096,7 +1097,8 @@ body > header{top:var(--demo-bar-h)!important}
 .jobs-list .job-meta{display:flex;flex-wrap:wrap;gap:.35rem 1rem;margin:.35rem 0 0;padding:0;list-style:none;color:var(--fg-3);font-size:.875rem}
 .jobs-list .job-meta li + li::before{content:"·";margin-right:1rem;color:var(--line-strong)}
 .jobs-list p{margin-top:.5rem;color:var(--fg-2);font-size:.9375rem}
-.jobs-list .btn-line{min-height:2.75rem;padding-inline:1rem;font-size:.9375rem;white-space:nowrap}
+.jobs-list .btn-accent{min-height:2.75rem;padding-inline:1.25rem;font-size:.9375rem;white-space:nowrap}
+.jobs-list .btn-accent svg{stroke-width:2.25}
 
 /* Abschluss: zurueck zur Anfrage — Messingflaeche fuer den Primaerweg */
 .page-cta{border-top:1px solid var(--line);background:var(--surface)}
@@ -1121,6 +1123,9 @@ body > header{top:var(--demo-bar-h)!important}
 @media (hover:hover) and (pointer:fine){
   .btn-accent:hover{background:var(--accent-strong)}
   .btn-accent:hover svg{transform:translateX(4px)}
+  /* Stellen-Buttons: Hover dunkelt ab statt aufzuhellen, Pfeil rueckt dezent nach */
+  .jobs-list .btn-accent:hover{background:var(--accent-dim)}
+  .jobs-list .btn-accent:hover svg{transform:translateX(2px)}
 }
 
 @media (min-width:1024px){
@@ -1139,9 +1144,8 @@ body > header{top:var(--demo-bar-h)!important}
   .about-facts li{padding:.9rem 1rem 1rem}
   .about-facts strong{font-size:1.375rem}
   .about-facts span{margin-top:.4rem;font-size:.875rem}
-  .jobs-list{padding:.75rem 0 2.5rem}
+  .jobs-list{padding:.25rem 0 2.5rem}
   .jobs-list article{grid-template-columns:1fr;gap:.75rem;padding:1.1rem 0}
-  .jobs-list .btn-line{width:100%}
   .page-cta > div{padding-block:2.25rem}
   .page-cta-actions{width:100%}
   .page-cta-actions > a{flex:1 1 100%}
