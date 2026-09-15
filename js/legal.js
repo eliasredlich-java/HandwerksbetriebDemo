@@ -1,0 +1,24 @@
+/* Rechtstexte (Demo) fuer den Impressum-/Datenschutz-Dialog. Gemeinsam genutzt
+   von Startseite und Unterseiten: [title, html] je Schluessel. */
+window.NK_LEGAL={impressum:['Impressum',[
+  '<strong>Hinweis: Demonstrationsseite für Webdesign-Portfolio.</strong> Alle nachfolgenden Angaben sind frei erfunden und dienen ausschließlich der strukturellen Darstellung eines Impressums nach § 5 DDG. Es besteht kein realer Geschäftsbetrieb; es können keine Bestellungen oder Dienstleistungen gebucht werden.',
+  '<strong>Angaben gemäß § 5 DDG</strong><br>Nordkante Dachwerk Demo GmbH (Fiktives Demonstrationsobjekt)<br>Musterstraße 123<br>20095 Hamburg<br>Deutschland',
+  '<strong>Vertreten durch</strong><br>Max Mustermann (Demo-Geschäftsführer)',
+  '<strong>Kontakt</strong><br>Telefon: 040 555 0100 (Erfundene Demo-Nummer)<br>E-Mail: demo@beispiel-handwerk.de',
+  '<strong>Registereintrag (fiktiv)</strong><br>Eintragung im Handelsregister: Amtsgericht Hamburg<br>Registernummer: HRB 000000 (Platzhalter)',
+  '<strong>Umsatzsteuer-ID (fiktiv)</strong><br>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG: DE 000000000 (Platzhalter)',
+  '<strong>Berufsbezeichnung (fiktiv)</strong><br>Dachdeckermeister (verliehen in Deutschland)<br>Zuständige Kammer: Handwerkskammer Hamburg (Platzhalter)<br>Berufsrechtliche Regelungen: Handwerksordnung (HwO)',
+  '<strong>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</strong><br>Max Mustermann, Musterstraße 123, 20095 Hamburg',
+  '<strong>Streitschlichtung</strong><br>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: https://ec.europa.eu/consumers/odr/. Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.',
+  '<strong>Haftung für Inhalte &amp; Bildnachweise</strong><br>Dieses Demonstrationsobjekt erhebt keinen Anspruch auf Richtigkeit. Personen, Referenzen, Bewertungen und Kundenstimmen sind fiktiv. Verwendete Fotos sind Symbolbilder (Unsplash-Lizenz).'
+].map(p=>`<p>${p}</p>`).join('')],datenschutz:['Datenschutzerklärung',[
+  '<strong>Hinweis: Muster-Datenschutzerklärung für eine Demo-Website.</strong> Diese Seite ist ein nicht-kommerzielles Demonstrationsobjekt (Fiktiv-Betrieb). Der Text ersetzt keine Rechtsberatung.',
+  '<strong>1. Verantwortlicher</strong><br>Nordkante Dachwerk Demo GmbH (Fiktives Demonstrationsobjekt), Max Mustermann, Musterstraße 123, 20095 Hamburg, E-Mail: demo@beispiel-handwerk.de',
+  '<strong>2. Keine Cookies, kein Tracking</strong><br>Diese Website setzt keine Cookies, verwendet keine Analyse- oder Tracking-Dienste und bindet keine Social-Media-Plugins ein. Es findet kein Profiling statt.',
+  '<strong>3. Server-Logfiles</strong><br>Beim Aufruf der Seite verarbeitet der Hosting-Anbieter technisch notwendig und automatisch Informationen, die Ihr Browser übermittelt (IP-Adresse, Datum/Uhrzeit, aufgerufene Datei, Browsertyp, Referrer-URL). Diese Daten werden nicht mit anderen Datenquellen zusammengeführt und nach kurzer Zeit gelöscht. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem sicheren und stabilen Betrieb).',
+  '<strong>4. Schriften &amp; Karten</strong><br>Alle Schriftarten werden lokal vom eigenen Server geladen; es findet keine Verbindung zu Google Fonts statt. Die Karte im Servicegebiet wird erst nach Ihrem ausdrücklichen Klick (2-Klick-Lösung) von OpenStreetMap geladen. Erst dann wird Ihre IP-Adresse an die OpenStreetMap Foundation (Großbritannien) übermittelt; Rechtsgrundlage ist Ihre Einwilligung, Art. 6 Abs. 1 lit. a DSGVO.',
+  '<strong>5. Bilder &amp; Stylesheet von Drittanbietern</strong><br>Symbolbilder werden von images.unsplash.com und das Stylesheet-Framework von cdn.tailwindcss.com geladen. Dabei wird Ihre IP-Adresse technisch bedingt an diese Anbieter übermittelt (Art. 6 Abs. 1 lit. f DSGVO). Auf einer produktiven Website wären diese Ressourcen lokal einzubinden.',
+  '<strong>6. Formulare (Demo)</strong><br>Die Anfrage- und Bewerbungsformulare übertragen keine Daten an einen Server. Eingaben werden ausschließlich im Browser verarbeitet, nur für die Anzeige einer Test-Erfolgsmeldung verwendet und beim Neuladen verworfen. Es werden keine Personen kontaktiert.',
+  '<strong>7. Externe Links</strong><br>Links zu externen Diensten (z.&nbsp;B. WhatsApp) sind Demo-Platzhalter und führen zu fiktiven Nummern. Beim Anklicken gelten die Datenschutzbestimmungen des jeweiligen Anbieters.',
+  '<strong>8. Ihre Rechte</strong><br>Sie haben das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) sowie Widerspruch (Art. 21 DSGVO). Zudem besteht ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde, z.&nbsp;B. dem Hamburgischen Beauftragten für Datenschutz und Informationsfreiheit.'
+].map(p=>`<p>${p}</p>`).join('')]};

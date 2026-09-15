@@ -1,0 +1,1171 @@
+/* ==========================================================================
+   Nordkante Dachwerk — Architectural Dark.
+   Anthrazit-Schiefer als Grund, weisse Typografie, Kalkstein-Gelb als
+   einziger Akzent. Kein Rot. Tiefe entsteht durch Flaechenstufen und
+   Haarlinien, nicht durch Schatten.
+   ========================================================================== */
+
+/* --- 1. Tokens ---------------------------------------------------------- */
+:root{
+  color-scheme:dark;
+
+  /* Flaechenstufen — je hoeher das Element, desto heller der Grund */
+  --bg:#12161A;          /* 60% Ground — warmes Schiefer-Anthrazit */
+  --surface:#1B2026;     /* Karten und Sektionsbloecke — flach, klar */
+  --surface-2:#191E24;   /* Eingabefelder — eingelassen, dunkler als die Karte */
+  --surface-3:#191E24;   /* aktiv; Hover arbeitet ueber die Kante, nicht die Flaeche */
+  --line:#2A323D;        /* praezise 1px-Kante */
+  --line-strong:#3A4450;
+
+  /* Typografie — gestochen scharf auf Anthrazit */
+  --fg:#FFFFFF;          /* H1/H2 — Reinweiss */
+  --fg-2:#EAE8E3;        /* Fliesstext — warmes Naturcreme, 13.4:1 auf Karten */
+  --fg-3:#A6ACB6;        /* Sekundaer — Sandgrau, auf AAA angehoben (7.18:1) */
+
+  /* Akzent: Kalkstein-Gelb. Genau einer, gezielt eingesetzt. */
+  --accent:#D4A359;      /* 10% Action — mattes Messing */
+  --accent-strong:#E5B263;/* Hover: nuanciert heller, kein Glow */
+  --accent-dim:#B08D4A;
+  --accent-ink:#12161A;  /* dunkle Schrift auf Messingflaeche, 7.95:1 */
+  --accent-tint:rgba(212,163,89,.10);
+  --accent-line:rgba(212,163,89,.32);
+
+  /* Keine Fremdfarben: Fehler markiert eine 2px-Messingkante plus Klartext,
+     Status-Marker stehen in Sandgrau. Farbe ist nie der einzige Traeger. */
+
+  /* Kanten: gebaut, nicht abgerundet */
+  --r:3px;
+  --r-media:6px;
+
+  /* Bewegung: starke Kurven, kurze Dauern, nie `ease-in` */
+  --ease-out:cubic-bezier(.23,1,.32,1);
+  --t-fast:120ms;
+  --t:180ms;
+  --t-slow:260ms;
+
+  --sticky-h:0px;
+
+  --icon-check:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M16.7 4.2a.75.75 0 0 1 .14 1.05l-8 10.5a.75.75 0 0 1-1.13.08l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.9 3.89 7.48-9.82a.75.75 0 0 1 1.05-.14z'/%3E%3C/svg%3E");
+  --icon-pin:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z'/%3E%3C/svg%3E");
+}
+
+/* --- 2. Basis ----------------------------------------------------------- */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip;background:var(--bg)}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:'Source Sans 3',ui-sans-serif,system-ui,sans-serif;
+  font-size:17px;
+  line-height:1.65;
+  font-feature-settings:"kern" 1;
+  overflow-x:clip;
+  padding-bottom:var(--sticky-h);
+}
+body.modal-open{overflow:hidden}
+[hidden]{display:none!important}
+.step-panel[hidden],.success-panel[hidden],.mobile-menu[hidden],.modal[hidden]{display:none!important}
+img{max-width:100%}
+
+/* --- 3. Flaechen: jede helle Tailwind-Flaeche auf die Dunkelstufen ------ */
+body .bg-white{background-color:var(--surface)}
+body .bg-paper{background-color:var(--bg)}
+body .bg-ink{background-color:var(--bg)}
+body .border-line{border-color:var(--line)}
+body .divide-line > *{border-color:var(--line)}
+body .bg-line{background-color:var(--line)}
+
+#google-reviews,#team,#servicegebiet,#faq,#bewerbung,.teaser{background:var(--bg)}
+#referenz,#anfrage{background:var(--surface)}
+#leistungen{background:var(--bg)}
+#google-reviews,#leistungen,#team,#servicegebiet,#faq,#bewerbung{border-top:1px solid var(--line)}
+
+/* --- 4. Typografie ------------------------------------------------------ */
+h1,h2,h3,h4,.font-display{
+  font-family:'Barlow',ui-sans-serif,system-ui,sans-serif;
+  font-weight:700;
+  letter-spacing:-.025em;
+  color:var(--fg);
+  text-wrap:balance;
+}
+h1,#top .hero-content h1{
+  font-size:clamp(2.25rem,1.55rem + 2.7vw,3.4rem);
+  font-weight:700!important;
+  line-height:1.05;
+  letter-spacing:-.03em;
+}
+h2{font-size:clamp(1.875rem,1.3rem + 2vw,2.75rem);line-height:1.1;letter-spacing:-.027em}
+h3{font-size:1.25rem;line-height:1.25;letter-spacing:-.015em}
+footer h2{font-size:.8125rem}
+p{margin-block:0}
+main p:not([class*="text-xs"]):not(.hero-lead):not(.showcase-lead){max-width:68ch}
+
+/* Sektionslabel: Kalksteinlinie statt schwebendem Etikett */
+p.text-xs.font-bold.uppercase{
+  display:flex;
+  align-items:center;
+  gap:.7rem;
+  margin:0;
+  color:var(--fg-3);
+  font-family:'Barlow',sans-serif;
+  font-size:.75rem;
+  font-weight:700;
+  letter-spacing:.11em;
+  line-height:1;
+}
+p.text-xs.font-bold.uppercase::before{
+  content:"";
+  flex:0 0 1.75rem;
+  height:2px;
+  background:var(--accent);
+}
+.text-center > p.text-xs.font-bold.uppercase{justify-content:center}
+
+/* --- 5. Schriftfarben: Tailwind-Opacity-Utilities auf lesbare Stufen ---- */
+/* `body `-Praefix gewinnt per Spezifitaet, unabhaengig von der Ladereihenfolge */
+body .text-ink\/80,body .text-ink\/75,body .text-ink\/70,body .text-ink\/65,
+body .text-white\/90,body .text-white\/85,body .text-white\/80,body .text-white\/75{color:var(--fg-2)}
+body .text-ink\/60,body .text-ink\/55,body .text-ink\/50,body .text-ink\/45,
+body .text-white\/70,body .text-white\/68,body .text-white\/65,body .text-white\/62,
+body .text-white\/60,body .text-white\/55,body .text-white\/50{color:var(--fg-3)}
+body .text-ink{color:var(--accent-ink)}          /* steht ausschliesslich auf Akzentflaechen */
+body .text-rust,body .text-lime{color:var(--accent)}
+body .border-rust{border-color:var(--accent)}
+body .decoration-rust{text-decoration-color:var(--accent)}
+/* Akzentflaeche traegt dunkle Schrift — nie weisse auf Gelb */
+body .bg-rust,body .bg-lime{background-color:var(--accent)}
+body .bg-rust.text-white,body .bg-lime.text-white,
+body .bg-rust,body .bg-lime{color:var(--accent-ink)}
+
+/* --- 6. Browser-Oberflaechen -------------------------------------------- */
+::selection{background:var(--accent);color:var(--accent-ink)}
+::-moz-selection{background:var(--accent);color:var(--accent-ink)}
+body{caret-color:var(--accent)}
+html{scrollbar-color:var(--line-strong) var(--bg);scrollbar-width:thin}
+::-webkit-scrollbar{width:12px;height:12px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--line-strong);border:3px solid var(--bg);border-radius:99px}
+::-webkit-scrollbar-thumb:hover{background:var(--fg-3)}
+a{text-underline-offset:.22em;text-decoration-thickness:.08em}
+
+/* --- 7. Fokus: Kalkstein-Gelb, ueberall gleich --------------------------- */
+.focus-ring:focus-visible,
+a:focus-visible,button:focus-visible,input:focus-visible,
+select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:3px;
+  border-radius:1px;
+}
+
+/* --- 8. Zustaende & Micro-Interactions ---------------------------------- */
+a,button,summary,label,input,select,textarea{
+  transition:color var(--t) var(--ease-out),
+             background-color var(--t) var(--ease-out),
+             border-color var(--t) var(--ease-out),
+             box-shadow var(--t) var(--ease-out),
+             transform var(--t-fast) var(--ease-out);
+}
+a[href]:active,button:not(:disabled):active{transform:scale(.985)}
+.hero-primary:active,#next-button:active,#submit-button:active,
+#quick-apply-open:active,#quick-apply-form button:active,
+.sticky-call-bar a:active,.google-reviews-cta:active{transform:scale(.97)}
+button:disabled{opacity:.4;cursor:not-allowed}
+button:not(:disabled),label[class*="cursor-pointer"]{cursor:pointer}
+
+/* Primaerknopf: Kalkstein-Flaeche, dunkle Schrift */
+.hero-primary,#submit-button,#quick-apply-open,#service-detail-cta,
+#leistungen > div > div:first-child > a[href="#anfrage"],
+#quick-apply-form button[type="submit"],.success-panel a[href^="tel:"]{
+  background:var(--accent);
+  color:var(--accent-ink);
+  border-radius:var(--r);
+  font-weight:700;
+}
+/* Sekundaerknopf: Flaeche aus dem Grund, Haarlinie als Kante */
+#next-button{background:var(--surface-2);color:var(--fg);border:1px solid var(--line-strong);border-radius:var(--r)}
+
+@media (hover:hover) and (pointer:fine){
+  .hero-primary:hover,#submit-button:hover,#quick-apply-open:hover,
+  #service-detail-cta:hover,#quick-apply-form button[type="submit"]:hover,
+  #leistungen > div > div:first-child > a[href="#anfrage"]:hover,
+  .success-panel a[href^="tel:"]:hover{background:var(--accent-strong)}
+  #next-button:hover{border-color:var(--accent)}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  a[href]:active,button:active{transform:none}
+}
+
+.hero-primary svg,#next-button svg,#quick-apply-open svg,
+#leistungen > div > div:first-child > a[href="#anfrage"] svg{
+  transition:transform var(--t) var(--ease-out);
+}
+@media (hover:hover) and (pointer:fine){
+  .hero-primary:hover svg,#next-button:hover svg,#quick-apply-open:hover svg,
+  #leistungen > div > div:first-child > a[href="#anfrage"]:hover svg{transform:translateX(3px)}
+}
+
+/* --- 9. Header ---------------------------------------------------------- */
+header{border-bottom:1px solid rgba(255,255,255,.10)}
+header nav a{position:relative;padding-block:.35rem;color:var(--fg-2)}
+header nav a::after{
+  content:"";
+  position:absolute;left:0;right:0;bottom:0;
+  height:1.5px;background:var(--accent);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform var(--t) var(--ease-out);
+}
+@media (hover:hover) and (pointer:fine){
+  header nav a:hover{color:var(--fg)}
+  header nav a:hover::after{transform:scaleX(1)}
+}
+header a[href^="tel:"]{color:var(--fg-2)}
+header a[href="#anfrage"]{border-radius:var(--r);letter-spacing:.01em}
+#menu-button{border-radius:var(--r);border-color:rgba(255,255,255,.35);color:var(--fg)}
+@media (hover:hover) and (pointer:fine){#menu-button:hover{background:rgba(255,255,255,.08)}}
+
+.mobile-menu{background:var(--bg);color:var(--fg-2);border-top:1px solid var(--line)}
+.mobile-menu a{
+  display:flex;align-items:center;
+  min-height:48px;
+  color:var(--fg-2);
+  border-bottom:1px solid var(--line);
+}
+.mobile-menu a:last-child{border-bottom:0}
+.mobile-menu .text-lime{color:var(--accent)!important}
+
+/* --- 10. Hero ----------------------------------------------------------- */
+#top{position:relative;background:var(--bg);color:var(--fg);text-align:left}
+#top .hero-bg{filter:saturate(.35) contrast(1.08) brightness(.62)}
+.hero-scrim{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(94deg, rgba(18,22,26,.96) 0%, rgba(18,22,26,.86) 42%, rgba(18,22,26,.52) 78%, rgba(18,22,26,.34) 100%),
+    linear-gradient(0deg, rgba(18,22,26,.85) 0%, rgba(18,22,26,0) 48%);
+}
+#top .hero-inner{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1.12fr .88fr;
+  gap:3.5rem;align-items:center;
+  width:min(1180px,100%);margin-inline:auto;
+  padding:10rem 20px 5.5rem;
+}
+#top .hero-content{max-width:36rem}
+#top .hero-kicker{
+  margin:0 0 1.1rem;
+  color:var(--accent);
+  font-family:'Barlow',sans-serif;
+  font-size:.8125rem;font-weight:600;
+  letter-spacing:.01em;line-height:1.35;
+}
+#top .hero-content h1{max-width:15ch;margin:0;color:var(--fg)}
+#top .hero-lead{
+  max-width:44ch;margin:1.25rem 0 0;
+  color:var(--fg-2);
+  font-size:1.0625rem;line-height:1.6;
+}
+#top .hero-bullets{max-width:44ch;margin-top:1.5rem;list-style:none;padding:0}
+#top .hero-bullets li{color:var(--fg-2);font-size:.9375rem;font-weight:500;letter-spacing:.005em}
+#top .hero-bullets svg{color:var(--accent)!important;width:1rem;height:1rem;margin-top:.3rem}
+#top .hero-cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.75rem;margin-top:2.25rem}
+#top .hero-primary{
+  min-height:3.25rem;padding-inline:1.75rem;
+  font-size:1rem;letter-spacing:.01em;text-decoration:none;
+}
+#top .hero-emergency{
+  display:inline-flex;align-items:center;min-height:2.75rem;
+  color:var(--fg-2);font-size:.9rem;text-decoration:none;
+}
+#top .hero-emergency strong{
+  margin-left:.35em;color:var(--fg);
+  text-decoration:underline;
+  text-decoration-color:var(--accent-dim);
+  text-underline-offset:.28em;
+  transition:text-decoration-color var(--t) var(--ease-out);
+}
+@media (hover:hover) and (pointer:fine){
+  #top .hero-emergency:hover strong{text-decoration-color:var(--accent)}
+}
+#top .hero-media{
+  position:relative;height:100%;min-height:24rem;
+  overflow:hidden;border-radius:var(--r-media);
+  box-shadow:0 24px 60px -20px rgba(0,0,0,.85);
+}
+#top .hero-media img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.8) brightness(.92)}
+
+/* Der eine inszenierte Moment: der Hero setzt sich beim Laden einmal. */
+@media (prefers-reduced-motion:no-preference){
+  #top .hero-kicker,#top .hero-content h1,#top .hero-lead,
+  #top .hero-bullets,#top .hero-cta-row,#top .hero-media{
+    animation:hero-settle 620ms var(--ease-out) both;
+  }
+  #top .hero-content h1{animation-delay:60ms}
+  #top .hero-lead{animation-delay:120ms}
+  #top .hero-bullets{animation-delay:170ms}
+  #top .hero-cta-row{animation-delay:220ms}
+  #top .hero-media{animation-delay:110ms;animation-duration:760ms}
+}
+@keyframes hero-settle{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* --- 11. Google-Bewertungen --------------------------------------------- */
+.google-reviews-head{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+  gap:.6rem 1.25rem;text-align:center;
+}
+.google-reviews-brand{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-family:'Barlow',sans-serif;font-size:1.05rem;font-weight:700;color:var(--fg);
+}
+.google-reviews-score{display:inline-flex;align-items:baseline;gap:.6rem}
+.google-reviews-score strong{font-family:'Barlow',sans-serif;font-size:1.15rem;color:var(--accent)}
+.stars{color:var(--accent);letter-spacing:.14em;font-size:1rem;line-height:1}
+.google-reviews-basis{width:100%;margin-top:.25rem;color:var(--fg-3);font-size:.875rem}
+.google-reviews-cta{
+  display:inline-flex;align-items:center;gap:.5rem;
+  min-height:44px;margin-top:1.25rem;padding:.6rem 1.35rem;
+  border:1px solid var(--line-strong);border-radius:var(--r);
+  color:var(--fg);font-size:.875rem;font-weight:700;text-decoration:none;
+}
+.google-reviews-cta svg{width:1rem;height:1rem;flex:none;color:var(--accent)}
+@media (hover:hover) and (pointer:fine){
+  .google-reviews-cta:hover{border-color:var(--accent)}
+}
+.google-reviews-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem;margin-top:2.5rem}
+.google-review-card{
+  display:flex;flex-direction:column;
+  margin:0;padding:1.5rem;
+  border:1px solid var(--line);border-radius:var(--r);
+  background:var(--surface);
+}
+.google-review-top{display:flex;align-items:center;gap:.7rem}
+.google-avatar{
+  display:grid;place-items:center;
+  width:2.375rem;height:2.375rem;flex:0 0 2.375rem;
+  border-radius:50%;background:var(--accent-tint);color:var(--accent);
+  border:1px solid var(--accent-line);
+  font-family:'Barlow',sans-serif;font-weight:700;font-size:.8rem;
+}
+.google-review-top strong{display:block;font-size:.9375rem;color:var(--fg);font-weight:600}
+.google-review-date{display:block;margin-top:.1rem;color:var(--fg-3);font-size:.75rem}
+.google-review-card .stars{display:block;margin-top:.9rem;font-size:.875rem}
+.google-review-card blockquote{margin:.6rem 0 0;color:var(--fg-2);font-size:.9375rem;line-height:1.65}
+.verified-badge,.verified-customer{
+  display:inline-flex;align-items:center;gap:.4rem;
+  margin-top:auto;padding-top:1rem;
+  color:var(--fg-3);font-size:.75rem;font-weight:600;
+}
+.verified-badge::before,.verified-customer::before{
+  content:"";width:.875rem;height:.875rem;flex:none;background:currentColor;
+  -webkit-mask:var(--icon-check) center/contain no-repeat;
+          mask:var(--icon-check) center/contain no-repeat;
+}
+.verified-customer svg{display:none}
+
+/* --- 12. Leistungen ----------------------------------------------------- */
+#leistungen > div{align-items:start}
+#leistungen h2{margin-top:1.25rem;max-width:13ch}
+#leistungen > div > div:first-child > p:not(.text-xs){
+  max-width:40ch;margin-top:1.35rem;color:var(--fg-2);line-height:1.7;
+}
+#leistungen > div > div:first-child > a[href="#anfrage"]{
+  display:inline-flex;align-items:center;gap:.6rem;
+  min-height:3rem;margin-top:2rem;padding:0 1.5rem;
+  border:0;font-size:.9375rem;text-decoration:none;box-shadow:none;
+}
+#leistungen > div > div:nth-child(2){
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  grid-auto-rows:1fr;gap:1.25rem;
+}
+#leistungen article{
+  display:flex;flex-direction:column;
+  min-width:0;height:100%;padding:0;overflow:hidden;
+  border:1px solid var(--line)!important;border-radius:var(--r);
+  background:var(--surface)!important;
+  transition:border-color var(--t) var(--ease-out),background-color var(--t) var(--ease-out);
+}
+@media (hover:hover) and (pointer:fine){
+  #leistungen article:hover{border-color:var(--accent)!important}
+}
+#leistungen article > img{
+  display:block;width:100%;aspect-ratio:16/10;
+  object-fit:cover;border-bottom:1px solid var(--line);
+  filter:saturate(.78) brightness(.88);
+  transition:filter var(--t-slow) var(--ease-out);
+}
+@media (hover:hover) and (pointer:fine){
+  #leistungen article:hover > img{filter:saturate(.95) brightness(1)}
+}
+#leistungen article > svg{display:none}
+#leistungen article h3{margin:1.5rem 1.5rem 0;font-size:1.3rem}
+#leistungen article p{max-width:none;margin:.6rem 1.5rem 0;color:var(--fg-2);font-size:.9375rem;line-height:1.6}
+#leistungen article > span:last-child{
+  display:inline-flex;align-self:flex-start;
+  margin:1.25rem 1.5rem 1.5rem;padding:.25rem .55rem;
+  border:1px solid var(--line);border-radius:2px;
+  color:var(--fg-3);font-size:.75rem;font-weight:700;letter-spacing:.08em;
+}
+.service-detail-trigger{
+  display:inline-flex;align-items:center;align-self:flex-start;
+  min-height:44px;margin:auto 1.5rem 1rem;padding:0;
+  border:0;background:none;
+  color:var(--accent);font-family:inherit;font-size:.875rem;font-weight:700;
+  text-decoration:underline;text-decoration-color:var(--accent-line);
+  text-decoration-thickness:1.5px;text-underline-offset:.3em;
+}
+@media (hover:hover) and (pointer:fine){
+  .service-detail-trigger:hover{color:var(--accent-strong);text-decoration-color:var(--accent)}
+}
+
+/* --- 13. Referenz + Vorher/Nachher-Vergleich ---------------------------- */
+#referenz{color:var(--fg)}
+#referenz > .mx-auto.grid{align-items:stretch}
+.showcase-left{display:flex;flex-direction:column;align-self:stretch;min-width:0}
+
+/* Der Vergleich: gesamte Flaeche ist Ziehflaeche. `contain` sperrt Layout-
+   Effekte ein, clip-path laeuft auf der GPU — daher kein Layout-Shift. */
+#comparison{
+  --position:50%;
+  position:relative;width:100%;max-width:100%;flex:1 1 auto;
+  overflow:hidden;
+  contain:layout paint;
+  touch-action:pan-y;            /* vertikal scrollt, horizontal zieht */
+  cursor:ew-resize;
+  user-select:none;-webkit-user-select:none;
+  background:var(--bg);
+}
+#comparison img{
+  pointer-events:none;
+  -webkit-user-drag:none;user-drag:none;
+}
+#comparison > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.slider-after{
+  position:absolute;inset:0;
+  width:100%!important;height:100%;
+  overflow:hidden;
+  clip-path:inset(0 calc(100% - var(--position)) 0 0);
+}
+#comparison .slider-after img{
+  position:absolute;inset:0;
+  width:100%!important;max-width:100%!important;height:100%;object-fit:cover;
+}
+#comparison > span[class*="left-5"],#comparison > span[class*="right-5"]{
+  z-index:3;border-radius:2px;
+  padding:.45rem .7rem;pointer-events:none;
+  font-family:'Barlow',sans-serif;font-size:.75rem;letter-spacing:.1em;
+}
+#comparison > span[class*="left-5"]{background:rgba(18,22,26,.88);color:var(--fg)}
+#comparison > span[class*="right-5"]{background:var(--accent);color:var(--accent-ink)}
+
+.slider-handle{
+  left:var(--position);
+  top:0;height:100%;width:2px;
+  margin-left:-1px;
+  background:var(--accent);
+  box-shadow:0 0 0 1px rgba(18,22,26,.55);
+  pointer-events:none;z-index:4;
+}
+#comparison .slider-handle > span{
+  width:2.75rem;height:2.75rem;
+  background:var(--accent);color:var(--accent-ink);
+  box-shadow:0 2px 8px rgba(0,0,0,.55);
+}
+/* Waehrend des Ziehens keine Uebergaenge — sonst laeuft der Regler nach. */
+#comparison.is-dragging .slider-after,#comparison.is-dragging .slider-handle{will-change:clip-path,left}
+#comparison:not(.is-dragging) .slider-after{transition:clip-path var(--t-fast) var(--ease-out)}
+#comparison:not(.is-dragging) .slider-handle{transition:left var(--t-fast) var(--ease-out)}
+
+/* Tastaturbedienung: nativer Regler bleibt, liegt unsichtbar als 44px-Ziel */
+#comparison-range{
+  z-index:5;height:44px;margin-inline:auto;
+  background:transparent;appearance:none;-webkit-appearance:none;
+  opacity:0;pointer-events:none;   /* ganze Flaeche zieht; Regler bleibt Tastaturziel */
+}
+#comparison-range::-webkit-slider-runnable-track{height:44px;background:transparent}
+#comparison-range::-moz-range-track{height:44px;background:transparent}
+#comparison-range::-webkit-slider-thumb{-webkit-appearance:none;width:44px;height:44px;border-radius:50%;background:transparent}
+#comparison-range::-moz-range-thumb{width:44px;height:44px;border:0;border-radius:50%;background:transparent}
+/* Fokus sichtbar am Griff, nicht am unsichtbaren Regler */
+#comparison:has(#comparison-range:focus-visible) .slider-handle > span{
+  outline:2px solid var(--fg);outline-offset:3px;
+}
+#comparison:has(#comparison-range:focus-visible){outline:2px solid var(--accent);outline-offset:-2px}
+#comparison.is-dragging{cursor:grabbing}
+
+.showcase-final,#referenz .flex.flex-col.justify-center{
+  display:flex;flex-direction:column;justify-content:center;
+  min-width:0;align-self:stretch;
+  padding:3.5rem;
+}
+.showcase-final h2{
+  margin:0;max-width:15ch;
+  font-family:'Barlow',sans-serif;
+  font-size:clamp(2rem,1.35rem + 2.4vw,3rem);
+  font-weight:700;line-height:1.06;letter-spacing:-.03em;color:var(--fg);
+}
+.showcase-final .showcase-lead{max-width:46ch;margin:1.35rem 0 0;color:var(--fg-2);font-size:1rem;line-height:1.7}
+.showcase-checklist{display:grid;gap:.65rem;margin:1.75rem 0 0;padding:0;list-style:none}
+.showcase-checklist li{display:flex;align-items:center;gap:.7rem;color:var(--fg-2);font-size:.9375rem}
+.showcase-checklist li::before{
+  content:"";width:1rem;height:1rem;flex:none;background:var(--accent);
+  -webkit-mask:var(--icon-check) center/contain no-repeat;
+          mask:var(--icon-check) center/contain no-repeat;
+}
+/* Kennzahlen: der zweite gezielte Akzenteinsatz */
+.showcase-final-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;margin:0;background:var(--line)}
+.showcase-final-facts > div{min-width:0;padding:1.25rem 1.5rem;background:var(--surface);color:var(--fg)}
+.showcase-final-facts strong{
+  display:block;
+  font-family:'Barlow',sans-serif;font-size:1.5rem;font-weight:700;
+  line-height:1.1;letter-spacing:-.02em;color:var(--accent);
+}
+.showcase-final-facts span{display:block;margin-top:.3rem;color:var(--fg-3);font-size:.8125rem}
+.showcase-note,.showcase-kicker{display:none}
+
+/* --- 14. Team ----------------------------------------------------------- */
+.team-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem;margin-top:2.75rem}
+.team-card{
+  position:relative;margin:0;overflow:hidden;
+  border:1px solid var(--line);border-radius:var(--r);background:var(--surface);
+  transition:border-color var(--t) var(--ease-out);
+}
+.team-card img{
+  display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top center;
+  filter:saturate(.72) brightness(.86) contrast(1.04);
+  transition:transform var(--t-slow) var(--ease-out),filter var(--t-slow) var(--ease-out);
+}
+@media (hover:hover) and (pointer:fine){
+  .team-card:hover{border-color:var(--accent)}
+  .team-card:hover img{transform:scale(1.025);filter:saturate(.9) brightness(.98) contrast(1.04)}
+}
+.team-card figcaption{padding:1.1rem 1.25rem 1.35rem;background:var(--surface);border-top:1px solid var(--line)}
+.team-card figcaption strong{display:block;font-family:'Barlow',sans-serif;font-size:1.05rem;font-weight:700;color:var(--fg)}
+.team-card figcaption span{display:block;margin-top:.2rem;color:var(--accent);font-size:.8125rem;font-weight:600}
+
+/* --- 15. Servicegebiet -------------------------------------------------- */
+.service-area-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.service-area-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:.5rem .875rem;margin-top:1.75rem;padding:0;list-style:none}
+.service-area-list li{
+  display:flex;align-items:center;gap:.5rem;
+  min-height:44px;padding:.5rem .875rem;
+  border:1px solid var(--line);border-radius:var(--r);
+  background:var(--surface);
+  color:var(--fg-2);font-size:.875rem;font-weight:600;
+  white-space:nowrap;hyphens:none;
+}
+.service-area-list li::before{
+  content:"";width:.875rem;height:.875rem;flex:none;background:var(--accent);
+  -webkit-mask:var(--icon-check) center/contain no-repeat;
+          mask:var(--icon-check) center/contain no-repeat;
+}
+.service-area-map{
+  position:relative;overflow:hidden;
+  border:1px solid var(--line);border-radius:var(--r-media);
+}
+.service-area-map iframe{display:block;width:100%;height:24rem;border:0;filter:grayscale(.7) invert(.92) hue-rotate(180deg) brightness(.92) contrast(.95)}
+/* 2-Klick-Loesung: Karte laedt erst nach Einwilligung (kein IP-Transfer vorab) */
+.map-consent{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:24rem;padding:4.5rem 1.5rem 2rem;text-align:center;
+  background:
+    linear-gradient(var(--line) 1px,transparent 1px) 0 0/2.5rem 2.5rem,
+    linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/2.5rem 2.5rem,
+    var(--surface-2);
+  color:var(--fg-2);
+}
+.map-consent-icon{color:var(--accent);margin-bottom:1rem}
+.map-consent-title{font-family:'Barlow',sans-serif;font-size:1.05rem;font-weight:700;color:var(--fg)}
+.map-consent-text{max-width:32ch;margin-top:.5rem;font-size:.85rem;line-height:1.55;color:var(--fg-2)}
+.map-consent-text a{color:var(--accent);text-decoration:underline}
+.map-consent-button{
+  margin-top:1.25rem;min-height:2.75rem;padding:0 1.5rem;
+  background:var(--accent);color:#12161A;
+  font-family:'Barlow',sans-serif;font-size:.875rem;font-weight:700;letter-spacing:.04em;
+  border:0;cursor:pointer;
+}
+.map-consent-button:hover{background:#E5B263}
+.service-area-badge{
+  position:absolute;left:1rem;top:1rem;z-index:1;
+  display:flex;align-items:flex-start;gap:.55rem;
+  max-width:min(19rem,calc(100% - 2rem));
+  padding:.8rem 1rem;
+  border:1px solid var(--line-strong);border-radius:var(--r);
+  background:rgba(18,22,26,.94);
+  color:var(--fg-2);font-size:.8125rem;font-weight:500;line-height:1.5;
+}
+.service-area-badge::before{
+  content:"";width:1rem;height:1rem;flex:none;margin-top:.1rem;background:var(--accent);
+  -webkit-mask:var(--icon-pin) center/contain no-repeat;
+          mask:var(--icon-pin) center/contain no-repeat;
+}
+
+/* --- 16. FAQ ------------------------------------------------------------ */
+.faq-list{margin-top:2.25rem;border-top:1px solid var(--line)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-question{
+  display:flex;width:100%;align-items:center;justify-content:space-between;
+  gap:1rem;min-height:56px;padding:1.15rem .25rem;
+  border:0;background:none;text-align:left;
+  font-family:'Barlow',sans-serif;font-size:1.0625rem;font-weight:700;
+  letter-spacing:-.01em;color:var(--fg);
+}
+@media (hover:hover) and (pointer:fine){.faq-question:hover{color:var(--accent)}}
+.faq-icon{
+  position:relative;flex:0 0 auto;width:1.25rem;height:1.25rem;
+  font-size:0;color:transparent;
+  transition:transform var(--t-slow) var(--ease-out);
+}
+.faq-icon::before,.faq-icon::after{
+  content:"";position:absolute;left:50%;top:50%;
+  background:var(--accent);border-radius:1px;transform:translate(-50%,-50%);
+}
+.faq-icon::before{width:1.125rem;height:2px}
+.faq-icon::after{width:2px;height:1.125rem;transition:opacity var(--t) var(--ease-out)}
+.faq-question[aria-expanded="true"] .faq-icon{transform:rotate(90deg)}
+.faq-question[aria-expanded="true"] .faq-icon::after{opacity:0}
+.faq-answer{padding:0 .25rem 1.4rem;color:var(--fg-2);font-size:.9375rem;line-height:1.7}
+.faq-answer p{max-width:70ch;margin:0}
+
+/* --- 17. Anfrage-Formular ----------------------------------------------- */
+#anfrage > div{align-items:stretch}
+#anfrage > div > div:first-child{display:flex;flex-direction:column;justify-content:center}
+#anfrage h2{margin-top:1.25rem}
+#anfrage > div > div:first-child > p:not(.text-xs){max-width:40ch;margin-top:1.35rem;color:var(--fg-2);line-height:1.7}
+#anfrage > div > div:first-child > div.border-l-2{
+  margin-top:2rem;padding-left:1.15rem;
+  border-left:2px solid var(--accent);
+  color:var(--fg-2);font-size:.9375rem;line-height:1.6;
+}
+.meister-card{
+  position:relative;margin-top:1.75rem;overflow:hidden;
+  border:1px solid var(--line);border-radius:var(--r-media);
+}
+.meister-card img{display:block;width:100%;height:14rem;object-fit:cover;filter:saturate(.78) brightness(.88)}
+
+#anfrage > div > div:nth-child(2){
+  border:1px solid var(--line)!important;
+  border-radius:var(--r);
+  background:var(--surface)!important;
+  box-shadow:none!important;
+}
+.step-dot{
+  border-radius:50%;
+  font-family:'Barlow',sans-serif;
+  border-color:var(--line-strong);
+  transition:background-color var(--t) var(--ease-out),color var(--t) var(--ease-out),border-color var(--t) var(--ease-out);
+}
+body .step-dot.text-ink\/45{color:var(--fg-3)}
+body .step-dot.bg-rust{background-color:var(--accent);color:var(--accent-ink)}
+#step-label{color:var(--fg-3)}
+#quote-form legend{color:var(--fg);font-size:1.375rem;line-height:1.2}
+#quote-form fieldset{border:0;margin:0;padding:0;min-width:0}
+
+#quote-form label[class*="cursor-pointer"]{
+  display:grid;grid-template-columns:auto minmax(0,1fr);
+  align-items:center;gap:0 .875rem;
+  min-height:56px;padding:1rem;
+  border:1px solid var(--line)!important;border-radius:var(--r);
+  background:var(--surface-2)!important;
+  color:var(--fg);
+}
+#quote-form label[class*="text-center"]{grid-template-columns:1fr;text-align:center;gap:0}
+#quote-form label[class*="cursor-pointer"]:has(input:checked){
+  border-color:var(--accent)!important;
+  background:var(--accent-tint)!important;
+  box-shadow:inset 0 0 0 1px var(--accent);
+}
+@media (hover:hover) and (pointer:fine){
+  #quote-form label[class*="cursor-pointer"]:hover{border-color:var(--accent)!important}
+  #quote-form label[class*="cursor-pointer"]:has(input:checked):hover{background:var(--accent-tint)!important}
+}
+#quote-form label[class*="cursor-pointer"]:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:3px}
+#quote-form label[class*="cursor-pointer"] > span{grid-column:2}
+#quote-form label[class*="text-center"] > span{grid-column:1}
+#quote-form label[class*="cursor-pointer"] > .choice-icon{grid-column:1}
+#quote-form label[class*="cursor-pointer"] .block.font-bold{color:var(--fg);font-weight:700}
+.choice-icon{
+  grid-column:1;grid-row:1 / span 2;
+  display:grid;place-items:center;
+  width:2.25rem;height:2.25rem;margin:0;
+  border-radius:var(--r);
+  border:1px solid var(--accent-line);
+  background:var(--accent-tint);color:var(--accent);
+  transition:background-color var(--t) var(--ease-out),color var(--t) var(--ease-out);
+}
+.choice-icon svg{display:block;width:1.125rem;height:1.125rem;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+label:has(input:checked) .choice-icon{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+
+#quote-form input[type="text"],#quote-form input[type="tel"],
+#quick-apply-form input,#quick-apply-form select{
+  border:1px solid var(--line-strong)!important;
+  border-radius:var(--r);
+  background:var(--surface-2)!important;
+  color:var(--fg);font-size:1rem;
+}
+#quote-form input::placeholder,#quick-apply-form input::placeholder{color:var(--fg-3);opacity:1}
+#quote-form input:focus,#quick-apply-form input:focus,#quick-apply-form select:focus{
+  border-color:var(--accent)!important;outline:none;
+  box-shadow:0 0 0 3px var(--accent-tint);
+}
+[aria-invalid="true"]{border-width:2px!important;border-color:var(--accent)!important;box-shadow:none}
+#summary{color:var(--fg-2)}
+#summary dt{color:var(--fg-3)}
+#summary dd{color:var(--fg)}
+#form-status{color:var(--accent);font-weight:700;min-height:1.25rem}
+
+#next-button,#submit-button{min-height:3rem;font-size:.9375rem;letter-spacing:.01em;box-shadow:none}
+#back-button{min-height:44px;color:var(--fg-3);border-radius:var(--r)}
+@media (hover:hover) and (pointer:fine){#back-button:hover{color:var(--fg);background:var(--surface-2)}}
+.success-panel > div:first-child{border-radius:var(--r);background:var(--accent)!important;color:var(--accent-ink)!important}
+.success-panel a[href^="tel:"]{min-height:3rem;text-decoration:none}
+
+/* --- 18. Karriere ------------------------------------------------------- */
+#bewerbung{border-block:1px solid var(--line)}
+#bewerbung .job-perks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.25rem;margin-top:3rem}
+#bewerbung .job-perk{
+  padding:1.5rem;
+  border:1px solid var(--line);border-radius:var(--r);
+  background:var(--surface);text-align:left;
+}
+#bewerbung .job-perk-icon{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:2.75rem;height:2.75rem;margin-bottom:1rem;
+  border:1px solid var(--accent-line);border-radius:var(--r);
+  background:var(--accent-tint);color:var(--accent);
+}
+#bewerbung .job-perk-icon svg{width:1.375rem;height:1.375rem;stroke-width:1.8}
+#bewerbung .job-perk h3{font-size:1.0625rem}
+#bewerbung .job-perk p{max-width:none;margin-top:.5rem;color:var(--fg-2);font-size:.9rem;line-height:1.6}
+#quick-apply-open{min-height:3.5rem;letter-spacing:.01em;box-shadow:none}
+
+/* --- 19. Footer --------------------------------------------------------- */
+footer{background:var(--bg)!important;color:var(--fg);border-top:1px solid var(--line)}
+footer h2{font-family:'Barlow',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+footer address a,footer nav a{color:var(--fg-2)}
+footer address a{text-decoration-color:var(--accent-dim)}
+footer nav a{min-height:44px;display:inline-flex;align-items:center;align-self:flex-start}
+@media (hover:hover) and (pointer:fine){
+  footer address a:hover,footer nav a:hover{color:var(--fg);text-decoration-color:var(--accent)}
+  footer nav a:hover{text-decoration:underline}
+}
+footer .border-t{border-color:var(--line)}
+
+/* --- 20. Dialoge -------------------------------------------------------- */
+.modal{background:rgba(10,13,16,.84);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.modal > [role="dialog"],.modal .modal-card{
+  /* Auf dunklem Grund traegt der Rand die Kante; der Schatten setzt nur
+     den Tiefenanker, statt als breiter Halo zu verpuffen. */
+  border:1px solid var(--line-strong);border-radius:var(--r);
+  background:var(--surface)!important;
+  box-shadow:none!important;
+}
+@media (prefers-reduced-motion:no-preference){
+  .modal:not([hidden]) > [role="dialog"],.modal:not([hidden]) .modal-card{animation:modal-in 220ms var(--ease-out) both}
+  .modal:not([hidden]){animation:fade-in 160ms var(--ease-out) both}
+}
+@keyframes modal-in{from{opacity:0;transform:scale(.97) translateY(8px)}to{opacity:1;transform:none}}
+@keyframes fade-in{from{opacity:0}to{opacity:1}}
+#modal-close,#quick-apply-close,#service-detail-close{
+  width:2.75rem;height:2.75rem;
+  border:1px solid var(--line-strong)!important;border-radius:var(--r);
+  background:transparent;color:var(--fg-2);font-size:1.5rem;line-height:1;
+}
+@media (hover:hover) and (pointer:fine){
+  #modal-close:hover,#quick-apply-close:hover,#service-detail-close:hover{
+    background:var(--surface-2);border-color:var(--accent-line)!important;color:var(--fg);
+  }
+}
+#modal-content,#service-detail-content{color:var(--fg-2)}
+#modal-content a{color:var(--accent)}
+#service-detail-content ul{list-style:none;padding-left:0;margin:0}
+#service-detail-content li{display:flex;gap:.65rem;margin-top:.65rem;color:var(--fg-2)}
+#service-detail-content li::before{
+  content:"";width:.875rem;height:.875rem;flex:none;margin-top:.45rem;background:var(--accent);
+  -webkit-mask:var(--icon-check) center/contain no-repeat;
+          mask:var(--icon-check) center/contain no-repeat;
+}
+#service-detail-cta{min-height:3rem;text-decoration:none}
+#quick-apply-form label{display:block;font-size:.875rem;font-weight:700;color:var(--fg)}
+#quick-apply-form input,#quick-apply-form select{display:block;width:100%;min-height:48px;margin-top:.4rem;padding:.5rem .75rem}
+#quick-apply-form button[type="submit"]{min-height:3rem}
+#quick-apply-status{color:var(--fg-2)}
+
+/* --- 21. Schwebende Kontaktpunkte --------------------------------------- */
+.whatsapp-widget{
+  position:fixed;right:1.25rem;bottom:1.25rem;z-index:45;
+  display:grid;place-items:center;
+  width:3.5rem;height:3.5rem;
+  border-radius:50%;background:var(--surface);color:var(--accent);
+  border:1px solid var(--line-strong);
+  box-shadow:0 2px 10px rgba(0,0,0,.5);
+  transition:transform var(--t) var(--ease-out),background-color var(--t) var(--ease-out);
+}
+@media (hover:hover) and (pointer:fine){.whatsapp-widget:hover{background:var(--surface-2);border-color:var(--accent);transform:translateY(-2px)}}
+.whatsapp-widget:focus-visible{transform:translateY(-2px)}
+.whatsapp-widget:active{transform:scale(.95)}
+.whatsapp-tooltip{
+  position:absolute;right:calc(100% + .75rem);
+  padding:.5rem .75rem;border-radius:var(--r);
+  border:1px solid var(--line-strong);
+  background:var(--surface);color:var(--fg);
+  font-size:.8125rem;font-weight:600;white-space:nowrap;
+  opacity:0;transform:translateX(4px);pointer-events:none;
+  transition:opacity var(--t) var(--ease-out),transform var(--t) var(--ease-out);
+}
+.whatsapp-widget:hover .whatsapp-tooltip,
+.whatsapp-widget:focus-visible .whatsapp-tooltip{opacity:1;transform:none}
+
+.sticky-call-bar{display:none}
+
+/* --- 22. Responsive ----------------------------------------------------- */
+@media (max-width:1023px){
+  #top .hero-inner{grid-template-columns:1fr;gap:2.5rem;padding:8.5rem 20px 3.5rem}
+  #top .hero-media{min-height:18rem}
+  #leistungen > div > div:nth-child(2){grid-template-columns:repeat(2,minmax(0,1fr))}
+  #leistungen article:first-child{grid-column:1 / -1}
+  .google-reviews-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .team-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .service-area-grid{grid-template-columns:1fr;gap:2rem}
+  #bewerbung .job-perks{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .showcase-final,#referenz .flex.flex-col.justify-center{padding:3rem 2.25rem}
+  #referenz > .mx-auto.grid{grid-template-columns:1fr}
+}
+
+@media (max-width:767px){
+  :root{--sticky-h:56px}
+  body{font-size:16px}
+
+  /* Sektionsabstaende: 30-50% weniger Luft als auf dem Desktop. ID-Selektoren
+     schlagen die Tailwind-Utilities (py-16/20/24) unabhaengig von der Ladereihenfolge. */
+  #google-reviews > div,#team > div,#servicegebiet > div,#faq > div,#bewerbung > div{padding-block:2.5rem}
+  #leistungen,#anfrage{padding-block:3rem}
+  footer > div{padding-block:2.25rem;gap:1.75rem}
+
+  /* Ueberschriften: eine Stufe kleiner, damit weniger Zeilen umbrechen */
+  #top .hero-content h1{font-size:clamp(1.75rem,6.8vw,2.25rem)}
+  #google-reviews h2,#leistungen h2,#team h2,#servicegebiet h2,#faq h2,#anfrage h2,#bewerbung h2{
+    font-size:clamp(1.55rem,6.2vw,1.9rem);line-height:1.12;
+  }
+  #leistungen h2,#anfrage h2{margin-top:.9rem}
+  #team h2,#servicegebiet h2,#faq h2,#bewerbung h2{margin-top:.75rem}
+  #leistungen > div > div:first-child > p:not(.text-xs),
+  #anfrage > div > div:first-child > p:not(.text-xs){margin-top:.9rem;font-size:.9375rem;line-height:1.6}
+  #team > div > div:first-child > p:not(.text-xs),
+  #servicegebiet .service-area-grid p:not(.text-xs),
+  #bewerbung > div > div:first-child > p:not(.text-xs){margin-top:.75rem;font-size:.9375rem;line-height:1.55}
+
+  /* Hero: Bild kleiner, Primaer-CTA vor den Bullets — damit er im ersten Screen liegt */
+  #top .hero-inner{display:flex;flex-direction:column;align-items:flex-start;gap:1rem;padding:6.25rem 18px 2.25rem}
+  #top .hero-content{display:contents}
+  #top .hero-kicker{order:1;margin-bottom:0}
+  #top .hero-content h1{order:2;max-width:100%}
+  #top .hero-media{order:3;width:100%;height:10rem;min-height:0;margin:.15rem 0}
+  #top .hero-lead{order:4;margin-top:0;font-size:.9375rem;line-height:1.55}
+  #top .hero-cta-row{order:5;flex-direction:column;align-items:stretch;gap:.5rem;margin-top:.35rem;width:100%}
+  #top .hero-bullets{order:6;margin-top:.5rem;width:100%}
+  #top .hero-bullets li{font-size:.875rem}
+  #top .hero-primary{width:100%;justify-content:center;min-height:3rem}
+  #top .hero-emergency{justify-content:center;min-height:2.5rem}
+
+  /* Bewertungen: Kopf kompakt, Karten als wischbare Reihe */
+  .google-reviews-head{gap:.4rem .875rem}
+  .google-reviews-cta{margin-top:.75rem;min-height:40px;padding:.4rem 1rem}
+  .google-reviews-grid{
+    display:flex;gap:.75rem;margin:1.5rem -20px 0;padding:0 20px .25rem;
+    overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:20px;
+    -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:none;
+  }
+  .google-reviews-grid::-webkit-scrollbar{display:none}
+  .google-review-card{flex:0 0 min(78%,18rem);scroll-snap-align:start;padding:1.1rem 1.15rem}
+  .google-review-card .stars{margin-top:.6rem}
+  .google-review-card blockquote{font-size:.9rem;line-height:1.55}
+  .verified-badge,.verified-customer{padding-top:.75rem}
+
+  /* Leistungen: Bild als Vorschau links, Text rechts — statt drei Vollbild-Karten */
+  #leistungen > div{gap:1.75rem}
+  #leistungen > div > div:nth-child(2){grid-template-columns:1fr;gap:.75rem}
+  #leistungen article:first-child{grid-column:auto}
+  #leistungen h2{max-width:none}
+  #leistungen > div > div:first-child > a[href="#anfrage"]{width:100%;justify-content:center;margin-top:1.25rem}
+  #leistungen article{
+    display:grid;grid-template-columns:6.25rem minmax(0,1fr);grid-template-rows:auto auto auto auto;
+    column-gap:1rem;height:auto;
+  }
+  #leistungen article > img{
+    grid-column:1;grid-row:1 / -1;
+    width:100%;height:100%;aspect-ratio:auto;object-fit:cover;
+    border-bottom:0;border-right:1px solid var(--line);
+  }
+  #leistungen article h3{grid-column:2;margin:.9rem 1rem 0 0;font-size:1.0625rem}
+  #leistungen article p{grid-column:2;margin:.25rem 1rem 0 0;font-size:.875rem;line-height:1.5}
+  #leistungen .service-detail-trigger{grid-column:2;margin:.2rem 1rem 0 0;min-height:40px;font-size:.8125rem;line-height:1.35;text-wrap:balance}
+  #leistungen article > span:last-child{grid-column:2;margin:.15rem 1rem .9rem 0}
+
+  /* Referenz: Slider halbhoch (16:10), Kennzahlen 2-spaltig, Kernpunkte eng */
+  #comparison{aspect-ratio:16/10}
+  .showcase-final,#referenz .flex.flex-col.justify-center{padding:1.5rem 18px 1.75rem}
+  .showcase-final h2{font-size:clamp(1.55rem,6.2vw,1.9rem)}
+  .showcase-final .showcase-lead{margin-top:.7rem;font-size:.9375rem;line-height:1.55}
+  .showcase-lead-more{display:none}
+  .showcase-checklist{gap:.35rem;margin-top:1rem}
+  .showcase-checklist li{font-size:.875rem}
+  .showcase-final-facts{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:1rem}
+  .showcase-final-facts > div{padding:.75rem .9rem}
+  .showcase-final-facts strong{font-size:1.2rem}
+  .showcase-final-facts span{margin-top:.1rem;font-size:.75rem}
+
+  /* Team: horizontales Karussell mit Scroll-Snap; die naechste Karte lugt hervor */
+  .team-grid{
+    display:flex;gap:.75rem;margin:1.5rem -20px 0;padding:0 20px .25rem;
+    overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:20px;
+    -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:none;
+  }
+  .team-grid::-webkit-scrollbar{display:none}
+  .team-card{flex:0 0 min(68%,15rem);scroll-snap-align:start}
+  .team-card img{aspect-ratio:1/1;object-fit:cover;object-position:top center}
+  .team-card figcaption{padding:.8rem .9rem .95rem}
+  .team-card figcaption strong{font-size:.9375rem}
+  .team-card figcaption span{font-size:.75rem;line-height:1.35}
+
+  /* Servicegebiet: Stadtteile als zweispaltiges Raster, Karte flacher */
+  .service-area-grid{gap:1.5rem}
+  .service-area-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:.4rem .5rem;margin-top:1rem}
+  .service-area-list li{min-height:38px;padding:.35rem .65rem;font-size:.8125rem}
+  .service-area-map iframe{height:15rem}
+  .map-consent{height:auto;min-height:15rem;padding:5rem 1rem 1.25rem}
+  .map-consent-icon{margin-bottom:.5rem}
+  .map-consent-text{font-size:.8125rem}
+  .map-consent-button{margin-top:.85rem}
+  .service-area-badge{left:.75rem;top:.75rem;padding:.55rem .7rem;font-size:.7rem;line-height:1.4}
+
+  .faq-list{margin-top:1.5rem}
+  .faq-question{font-size:1rem;min-height:52px;padding:.85rem .125rem}
+  .faq-answer{padding-bottom:1.1rem;font-size:.9rem}
+
+  /* Anfrage: Formularkarte direkt unter der Einleitung, Meisterbild flacher */
+  #anfrage > div{display:flex;flex-direction:column;gap:1.5rem}
+  #anfrage > div > div:first-child > div.border-l-2{margin-top:1.15rem;font-size:.875rem}
+  .meister-card{margin-top:1.15rem}
+  .meister-card img{height:10rem}
+  #anfrage > div > div:nth-child(2){padding:1.15rem 1rem!important}
+  #anfrage > div > div:nth-child(2) > div.mb-10{margin-bottom:1.5rem}
+  #quote-form label[class*="cursor-pointer"]{padding:.75rem .875rem;min-height:52px}
+  #quote-form legend{font-size:1.25rem}
+
+  /* Karriere: Vorteile als kompakte Zeilen (Icon links, Text rechts) */
+  #bewerbung .job-perks{grid-template-columns:1fr;gap:.6rem;margin-top:1.5rem}
+  #bewerbung .job-perk{display:grid;grid-template-columns:2.5rem minmax(0,1fr);column-gap:.9rem;padding:.9rem 1rem}
+  #bewerbung .job-perk-icon{grid-row:1 / span 2;width:2.5rem;height:2.5rem;margin:0}
+  #bewerbung .job-perk-icon svg{width:1.25rem;height:1.25rem}
+  #bewerbung .job-perk h3{grid-column:2;font-size:1rem}
+  #bewerbung .job-perk p{grid-column:2;margin-top:.2rem;font-size:.875rem;line-height:1.5}
+  #bewerbung > div > div.mt-12{margin-top:1.5rem}
+  #quick-apply-open{width:100%;text-align:center;min-height:3rem}
+
+  /* Schwebende Kontaktpunkte: eine Leiste statt Leiste + Button. WhatsApp
+     wandert in die Sticky-Leiste; der Floating-Button verdeckt so keinen Inhalt. */
+  .whatsapp-widget{display:none}
+  .sticky-call-bar{
+    position:fixed;inset:auto 0 0 0;z-index:40;
+    display:grid;grid-template-columns:1.25fr auto 1fr;gap:1px;
+    background:var(--line);
+    border-top:1px solid var(--line-strong);
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  .sticky-call-bar a{
+    display:flex;align-items:center;justify-content:center;gap:.45rem;
+    min-height:56px;padding:.5rem .5rem;
+    font-family:'Barlow',sans-serif;font-size:.8125rem;font-weight:700;
+    letter-spacing:.02em;text-align:center;text-decoration:none;line-height:1.15;
+  }
+  .sticky-call-bar a svg{width:1.25rem;height:1.25rem;flex:none}
+  .sticky-call-bar .call{background:var(--accent);color:var(--accent-ink)}
+  .sticky-call-bar .whatsapp{width:3.5rem;background:var(--surface);color:var(--accent)}
+  .sticky-call-bar .request{background:var(--surface-2);color:var(--fg)}
+}
+
+@media (max-width:400px){
+  h1,#top .hero-content h1{font-size:clamp(1.6rem,7.4vw,2rem)}
+  .showcase-final h2,h2{font-size:clamp(1.45rem,6.8vw,1.8rem)}
+  .showcase-final-facts > div{padding:.65rem .75rem}
+  .showcase-final-facts strong{font-size:1.1rem}
+  #leistungen article{grid-template-columns:5.5rem minmax(0,1fr)}
+}
+
+/* --- 23. Demo-Hinweis (fixierte Top-Bar) -------------------------------- */
+:root{--demo-bar-h:2.25rem}
+.demo-bar{
+  position:fixed;inset:0 0 auto 0;z-index:40;
+  min-height:var(--demo-bar-h);
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+  padding:.3rem 1rem;
+  background:var(--accent);color:#12161A;
+  font-family:'Barlow',ui-sans-serif,system-ui,sans-serif;
+  font-size:.8rem;font-weight:700;letter-spacing:.02em;line-height:1.3;
+  text-align:center;
+}
+.demo-bar strong{
+  flex:none;padding:.1rem .45rem;border:1.5px solid #12161A;
+  font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+}
+body{padding-top:var(--demo-bar-h)}
+body > header{top:var(--demo-bar-h)!important}
+.demo-footer-note{
+  border-top:1px solid rgba(255,255,255,.15);
+  padding:1rem 1.25rem;text-align:center;
+  font-size:.8rem;line-height:1.5;color:rgba(255,255,255,.7);
+}
+.demo-footer-note strong{color:var(--accent)}
+@media (max-width:639px){
+  :root{--demo-bar-h:2.5rem}
+  .demo-bar{font-size:.72rem}
+  .demo-bar .demo-bar-long{display:none}
+}
+
+/* --- 24. Druck ---------------------------------------------------------- */
+@media print{
+  .demo-bar{position:static;background:#fff;color:#000;border-bottom:1px solid #000}
+  body{padding-top:0}
+  .sticky-call-bar,.whatsapp-widget,header,.modal{display:none!important}
+  html,body{background:#fff;color:#000;padding-bottom:0}
+  #top,#referenz,#anfrage,footer{background:#fff!important;color:#000!important}
+}
+
+/* --- 25. Teaser (Startseite) --------------------------------------------- */
+/* Kompakte Verweise auf die Unterseiten Team und Karriere. Gleiche Grammatik
+   wie der Rest: Haarlinie oben, zwei Spalten, ein Linien-Knopf. Kein Schatten. */
+.teaser{border-top:1px solid var(--line)}
+.teaser-inner{
+  display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);
+  gap:2rem 4rem;align-items:center;
+  max-width:80rem;margin-inline:auto;padding:3.5rem 1.25rem;
+}
+.teaser h2{font-size:clamp(1.5rem,1.15rem + 1.3vw,2.125rem);line-height:1.12}
+.teaser-copy p:not(.text-xs){max-width:54ch}
+.teaser-aside{display:flex;flex-direction:column;align-items:flex-start;gap:1.25rem;justify-self:end}
+
+/* Drei Gesichter als ruhige Reihe — dieselbe Entsaettigung wie die Teamkarten */
+.teaser-faces{display:flex;gap:.5rem;list-style:none;margin:0;padding:0}
+.teaser-faces img{
+  display:block;width:3.5rem;height:3.5rem;object-fit:cover;object-position:top center;
+  border:1px solid var(--line-strong);border-radius:var(--r);
+  filter:saturate(.72) brightness(.88) contrast(1.04);
+}
+.teaser-facts{display:flex;flex-wrap:wrap;gap:.4rem .5rem;list-style:none;margin:0;padding:0}
+.teaser-facts li{
+  padding:.3rem .65rem;border:1px solid var(--line);border-radius:var(--r);
+  color:var(--fg-2);font-size:.8125rem;font-weight:600;line-height:1.4;
+}
+
+/* Linien-Knopf: Flaeche aus der Karte, 1px-Kante, Pfeil rueckt 4px nach rechts */
+.btn-line{
+  display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
+  min-height:3rem;padding:0 1.25rem;
+  border:1px solid var(--line-strong);border-radius:var(--r);
+  background:var(--surface);color:var(--fg);
+  font-family:'Barlow',ui-sans-serif,system-ui,sans-serif;
+  font-size:1rem;font-weight:700;letter-spacing:.01em;
+  text-decoration:none;
+}
+.btn-line svg{flex:none;transition:transform var(--t) var(--ease-out)}
+@media (hover:hover) and (pointer:fine){
+  .btn-line:hover{border-color:var(--accent);background:var(--surface-2)}
+  .btn-line:hover svg{transform:translateX(4px)}
+}
+.footer-jobs-link{font-weight:600;color:var(--fg-2)}
+
+@media (max-width:1023px){
+  .teaser-inner{grid-template-columns:1fr;gap:1.5rem;padding:2.75rem 1.25rem}
+  .teaser-aside{justify-self:stretch;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:space-between}
+}
+@media (max-width:767px){
+  .teaser-inner{gap:1.25rem;padding:2.25rem 20px}
+  .teaser-aside{flex-direction:column;align-items:stretch;gap:1rem}
+  .btn-line{width:100%}
+}
+
+/* --- 26. Unterseiten: Intro, Fakten, Stellen, Abschluss-CTA -------------- */
+.page-intro{padding:8.5rem 0 3rem;border-bottom:1px solid var(--line)}
+.page-intro > div{max-width:80rem;margin-inline:auto;padding-inline:1.25rem}
+.page-intro h1{max-width:22ch;margin:1rem 0 0;font-size:clamp(2.25rem,1.55rem + 2.7vw,3.4rem);line-height:1.05;letter-spacing:-.03em} /* Klassen-Spezifitaet: schlaegt Tailwinds h1-Reset */
+.page-lead{max-width:60ch;margin-top:1.25rem;color:var(--fg-2);font-size:1.125rem;line-height:1.6}
+.breadcrumb{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1.5rem;padding:0;list-style:none;color:var(--fg-3);font-size:.875rem}
+.breadcrumb a{color:var(--fg-2);text-decoration:underline;text-decoration-color:var(--line-strong)}
+.breadcrumb li + li::before{content:"/";margin-right:.5rem;color:var(--line-strong)}
+@media (hover:hover) and (pointer:fine){.breadcrumb a:hover{color:var(--fg);text-decoration-color:var(--accent)}}
+
+/* Zahlenzeile: vier Werte, eine Linie darueber, Barlow in Messing */
+.about-facts{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;
+  margin:2.75rem 0 0;padding:0;list-style:none;
+}
+.about-facts li{padding:1.1rem 1.25rem;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.about-facts strong{display:block;font-family:'Barlow',sans-serif;font-size:1.5rem;font-weight:700;line-height:1.1;letter-spacing:-.02em;color:var(--accent)}
+.about-facts span{display:block;margin-top:.3rem;color:var(--fg-3);font-size:.8125rem}
+
+/* Ueber uns: Leitsaetze als zweispaltige Liste mit Messing-Haken */
+.about-values{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem 2.5rem;margin:2rem 0 0;padding:0;list-style:none}
+.about-values li{position:relative;padding-left:1.75rem;color:var(--fg-2)}
+.about-values li::before{
+  content:"";position:absolute;left:0;top:.35rem;width:1rem;height:1rem;
+  background:var(--accent);-webkit-mask:var(--icon-check) center/contain no-repeat;mask:var(--icon-check) center/contain no-repeat;
+}
+.about-values strong{display:block;color:var(--fg);font-family:'Barlow',sans-serif;font-size:1.0625rem}
+
+/* Stellenliste: eine Zeile pro Stelle, Haarlinien statt Karten */
+.jobs-list{margin-top:2.5rem;border-top:1px solid var(--line)}
+.jobs-list article{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem 2rem;align-items:center;
+  padding:1.35rem 0;border-bottom:1px solid var(--line);
+}
+.jobs-list h3{font-size:1.125rem}
+.jobs-list .job-meta{display:flex;flex-wrap:wrap;gap:.35rem 1rem;margin:.35rem 0 0;padding:0;list-style:none;color:var(--fg-3);font-size:.875rem}
+.jobs-list .job-meta li + li::before{content:"·";margin-right:1rem;color:var(--line-strong)}
+.jobs-list p{margin-top:.5rem;color:var(--fg-2);font-size:.9375rem}
+.jobs-list .btn-line{min-height:2.75rem;padding-inline:1rem;font-size:.9375rem}
+
+/* Abschluss: zurueck zur Anfrage — Messingflaeche fuer den Primaerweg */
+.page-cta{border-top:1px solid var(--line);background:var(--surface)}
+.page-cta > div{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.25rem 2rem;
+  max-width:80rem;margin-inline:auto;padding:2.75rem 1.25rem;
+}
+.page-cta h2{font-size:clamp(1.375rem,1.1rem + 1vw,1.875rem)}
+.page-cta p{margin-top:.4rem;color:var(--fg-2)}
+.page-cta-actions{display:flex;flex-wrap:wrap;gap:.75rem}
+.btn-accent{
+  display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
+  min-height:3rem;padding:0 1.5rem;border-radius:var(--r);
+  background:var(--accent);color:var(--accent-ink);
+  font-family:'Barlow',ui-sans-serif,system-ui,sans-serif;font-size:1rem;font-weight:700;letter-spacing:.01em;
+  text-decoration:none;
+}
+.btn-accent svg{flex:none;transition:transform var(--t) var(--ease-out)}
+@media (hover:hover) and (pointer:fine){
+  .btn-accent:hover{background:var(--accent-strong)}
+  .btn-accent:hover svg{transform:translateX(4px)}
+}
+
+@media (min-width:1024px){
+  .page-intro > div,.page-cta > div{padding-inline:2rem}
+}
+@media (max-width:1023px){
+  .about-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:767px){
+  .page-intro{padding:6.5rem 0 2.25rem}
+  .page-intro > div,.page-cta > div{padding-inline:20px}
+  .page-lead{font-size:1rem;line-height:1.55}
+  .about-facts{gap:.6rem;margin-top:1.75rem}
+  .about-facts li{padding:.85rem 1rem}
+  .about-facts strong{font-size:1.25rem}
+  .about-values{grid-template-columns:1fr;gap:.9rem;margin-top:1.5rem}
+  .jobs-list{margin-top:1.75rem}
+  .jobs-list article{grid-template-columns:1fr;gap:.75rem;padding:1.1rem 0}
+  .jobs-list .btn-line{width:100%}
+  .page-cta > div{padding-block:2.25rem}
+  .page-cta-actions{width:100%}
+  .page-cta-actions > a{flex:1 1 100%}
+  .btn-accent{width:100%}
+}
