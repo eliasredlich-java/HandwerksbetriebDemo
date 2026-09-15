@@ -738,6 +738,7 @@
   #quote-form label[class*="cursor-pointer"]:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:3px}
   #quote-form label[class*="cursor-pointer"] > span{grid-column:2}
   #quote-form label[class*="text-center"] > span{grid-column:1}
+  #quote-form label[class*="cursor-pointer"] > .choice-icon{grid-column:1}
   #quote-form label[class*="cursor-pointer"] .block.font-bold{color:var(--fg);font-weight:700}
   .choice-icon{
     grid-column:1;grid-row:1 / span 2;
@@ -888,85 +889,164 @@
   }
 
   @media (max-width:767px){
-    :root{--sticky-h:68px}
+    :root{--sticky-h:56px}
     body{font-size:16px}
 
-    #top .hero-inner{display:flex;flex-direction:column;align-items:flex-start;gap:1.15rem;padding:6.5rem 18px 2.75rem}
+    /* Sektionsabstaende: 30-50% weniger Luft als auf dem Desktop. ID-Selektoren
+       schlagen die Tailwind-Utilities (py-16/20/24) unabhaengig von der Ladereihenfolge. */
+    #google-reviews > div,#team > div,#servicegebiet > div,#faq > div,#bewerbung > div{padding-block:2.5rem}
+    #leistungen,#anfrage{padding-block:3rem}
+    footer > div{padding-block:2.25rem;gap:1.75rem}
+
+    /* Ueberschriften: eine Stufe kleiner, damit weniger Zeilen umbrechen */
+    #top .hero-content h1{font-size:clamp(1.75rem,6.8vw,2.25rem)}
+    #google-reviews h2,#leistungen h2,#team h2,#servicegebiet h2,#faq h2,#anfrage h2,#bewerbung h2{
+      font-size:clamp(1.55rem,6.2vw,1.9rem);line-height:1.12;
+    }
+    #leistungen h2,#anfrage h2{margin-top:.9rem}
+    #team h2,#servicegebiet h2,#faq h2,#bewerbung h2{margin-top:.75rem}
+    #leistungen > div > div:first-child > p:not(.text-xs),
+    #anfrage > div > div:first-child > p:not(.text-xs){margin-top:.9rem;font-size:.9375rem;line-height:1.6}
+    #team > div > div:first-child > p:not(.text-xs),
+    #servicegebiet .service-area-grid p:not(.text-xs),
+    #bewerbung > div > div:first-child > p:not(.text-xs){margin-top:.75rem;font-size:.9375rem;line-height:1.55}
+
+    /* Hero: Bild kleiner, Primaer-CTA vor den Bullets — damit er im ersten Screen liegt */
+    #top .hero-inner{display:flex;flex-direction:column;align-items:flex-start;gap:1rem;padding:6.25rem 18px 2.25rem}
     #top .hero-content{display:contents}
     #top .hero-kicker{order:1;margin-bottom:0}
-    #top .hero-content h1{order:2;max-width:100%;font-size:clamp(1.9rem,7.2vw,2.45rem)}
-    #top .hero-media{order:3;width:100%;height:13.5rem;min-height:0;margin:.35rem 0}
-    #top .hero-lead{order:4;margin-top:0;font-size:1rem}
-    #top .hero-bullets{order:5;margin-top:.35rem;width:100%}
-    #top .hero-cta-row{order:6;flex-direction:column;align-items:stretch;gap:.9rem;margin-top:1.35rem;width:100%}
-    #top .hero-primary{width:100%;justify-content:center}
-    #top .hero-emergency{justify-content:flex-start}
+    #top .hero-content h1{order:2;max-width:100%}
+    #top .hero-media{order:3;width:100%;height:10rem;min-height:0;margin:.15rem 0}
+    #top .hero-lead{order:4;margin-top:0;font-size:.9375rem;line-height:1.55}
+    #top .hero-cta-row{order:5;flex-direction:column;align-items:stretch;gap:.5rem;margin-top:.35rem;width:100%}
+    #top .hero-bullets{order:6;margin-top:.5rem;width:100%}
+    #top .hero-bullets li{font-size:.875rem}
+    #top .hero-primary{width:100%;justify-content:center;min-height:3rem}
+    #top .hero-emergency{justify-content:center;min-height:2.5rem}
 
-    #leistungen > div > div:nth-child(2){grid-template-columns:1fr;gap:1.25rem}
+    /* Bewertungen: Kopf kompakt, Karten als wischbare Reihe */
+    .google-reviews-head{gap:.4rem .875rem}
+    .google-reviews-cta{margin-top:.75rem;min-height:40px;padding:.4rem 1rem}
+    .google-reviews-grid{
+      display:flex;gap:.75rem;margin:1.5rem -20px 0;padding:0 20px .25rem;
+      overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:20px;
+      -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:none;
+    }
+    .google-reviews-grid::-webkit-scrollbar{display:none}
+    .google-review-card{flex:0 0 min(78%,18rem);scroll-snap-align:start;padding:1.1rem 1.15rem}
+    .google-review-card .stars{margin-top:.6rem}
+    .google-review-card blockquote{font-size:.9rem;line-height:1.55}
+    .verified-badge,.verified-customer{padding-top:.75rem}
+
+    /* Leistungen: Bild als Vorschau links, Text rechts — statt drei Vollbild-Karten */
+    #leistungen > div{gap:1.75rem}
+    #leistungen > div > div:nth-child(2){grid-template-columns:1fr;gap:.75rem}
     #leistungen article:first-child{grid-column:auto}
-    #leistungen h2{max-width:16ch}
-    #leistungen > div > div:first-child > a[href="#anfrage"]{width:100%;justify-content:center}
+    #leistungen h2{max-width:none}
+    #leistungen > div > div:first-child > a[href="#anfrage"]{width:100%;justify-content:center;margin-top:1.25rem}
+    #leistungen article{
+      display:grid;grid-template-columns:6.25rem minmax(0,1fr);grid-template-rows:auto auto auto auto;
+      column-gap:1rem;height:auto;
+    }
+    #leistungen article > img{
+      grid-column:1;grid-row:1 / -1;
+      width:100%;height:100%;aspect-ratio:auto;object-fit:cover;
+      border-bottom:0;border-right:1px solid var(--line);
+    }
+    #leistungen article h3{grid-column:2;margin:.9rem 1rem 0 0;font-size:1.0625rem}
+    #leistungen article p{grid-column:2;margin:.25rem 1rem 0 0;font-size:.875rem;line-height:1.5}
+    #leistungen .service-detail-trigger{grid-column:2;margin:.2rem 1rem 0 0;min-height:40px;font-size:.8125rem;line-height:1.35;text-wrap:balance}
+    #leistungen article > span:last-child{grid-column:2;margin:.15rem 1rem .9rem 0}
 
-    .google-reviews-grid{grid-template-columns:1fr;gap:1rem;margin-top:1.75rem}
-    .google-reviews-head{gap:.5rem .875rem}
-
-    /* Referenz kompakt: Bild, Kennzahlen (2 Spalten), Kernpunkte ohne Luftpolster */
-    #comparison{aspect-ratio:4/3}
-    .showcase-final,#referenz .flex.flex-col.justify-center{padding:1.75rem 18px 2.25rem}
-    .showcase-final h2{font-size:clamp(1.65rem,6.5vw,2.1rem)}
-    .showcase-final .showcase-lead{margin-top:.85rem;font-size:.9375rem;line-height:1.55}
+    /* Referenz: Slider halbhoch (16:10), Kennzahlen 2-spaltig, Kernpunkte eng */
+    #comparison{aspect-ratio:16/10}
+    .showcase-final,#referenz .flex.flex-col.justify-center{padding:1.5rem 18px 1.75rem}
+    .showcase-final h2{font-size:clamp(1.55rem,6.2vw,1.9rem)}
+    .showcase-final .showcase-lead{margin-top:.7rem;font-size:.9375rem;line-height:1.55}
     .showcase-lead-more{display:none}
-    .showcase-checklist{gap:.45rem;margin-top:1.15rem}
+    .showcase-checklist{gap:.35rem;margin-top:1rem}
     .showcase-checklist li{font-size:.875rem}
-    .showcase-final-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .showcase-final-facts > div{padding:.85rem 1rem}
-    .showcase-final-facts strong{font-size:1.25rem}
-    .showcase-final-facts span{margin-top:.15rem;font-size:.75rem}
+    .showcase-final-facts{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:1rem}
+    .showcase-final-facts > div{padding:.75rem .9rem}
+    .showcase-final-facts strong{font-size:1.2rem}
+    .showcase-final-facts span{margin-top:.1rem;font-size:.75rem}
 
-    /* Team: Portraits oben verankert, damit Koepfe nie abgeschnitten werden */
-    .team-grid{grid-template-columns:1fr;gap:1rem;margin-top:1.75rem}
-    .team-card img{aspect-ratio:5/4;object-fit:cover;object-position:top center}
+    /* Team: horizontales Karussell mit Scroll-Snap; die naechste Karte lugt hervor */
+    .team-grid{
+      display:flex;gap:.75rem;margin:1.5rem -20px 0;padding:0 20px .25rem;
+      overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:20px;
+      -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:none;
+    }
+    .team-grid::-webkit-scrollbar{display:none}
+    .team-card{flex:0 0 min(68%,15rem);scroll-snap-align:start}
+    .team-card img{aspect-ratio:1/1;object-fit:cover;object-position:top center}
+    .team-card figcaption{padding:.8rem .9rem .95rem}
+    .team-card figcaption strong{font-size:.9375rem}
+    .team-card figcaption span{font-size:.75rem;line-height:1.35}
 
-    /* Servicegebiet: Stadtteile als kompakte Pills statt Liste */
-    .service-area-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:1.25rem}
-    .service-area-list li{min-height:40px;padding:.45rem .75rem;font-size:.8125rem}
-    .service-area-map iframe,.map-consent{height:17rem;min-height:17rem}
-    .service-area-badge{left:.75rem;top:.75rem;padding:.65rem .8rem;font-size:.75rem}
+    /* Servicegebiet: Stadtteile als zweispaltiges Raster, Karte flacher */
+    .service-area-grid{gap:1.5rem}
+    .service-area-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:.4rem .5rem;margin-top:1rem}
+    .service-area-list li{min-height:38px;padding:.35rem .65rem;font-size:.8125rem}
+    .service-area-map iframe{height:15rem}
+    .map-consent{height:auto;min-height:15rem;padding:5rem 1rem 1.25rem}
+    .map-consent-icon{margin-bottom:.5rem}
+    .map-consent-text{font-size:.8125rem}
+    .map-consent-button{margin-top:.85rem}
+    .service-area-badge{left:.75rem;top:.75rem;padding:.55rem .7rem;font-size:.7rem;line-height:1.4}
 
-    .faq-question{font-size:1rem;padding:1rem .125rem}
+    .faq-list{margin-top:1.5rem}
+    .faq-question{font-size:1rem;min-height:52px;padding:.85rem .125rem}
+    .faq-answer{padding-bottom:1.1rem;font-size:.9rem}
 
-    #anfrage > div{display:flex;flex-direction:column;gap:1.75rem}
-    #anfrage > div > div:nth-child(2){padding:1.25rem 1rem!important}
-    #quote-form label[class*="cursor-pointer"]{padding:.875rem}
+    /* Anfrage: Formularkarte direkt unter der Einleitung, Meisterbild flacher */
+    #anfrage > div{display:flex;flex-direction:column;gap:1.5rem}
+    #anfrage > div > div:first-child > div.border-l-2{margin-top:1.15rem;font-size:.875rem}
+    .meister-card{margin-top:1.15rem}
+    .meister-card img{height:10rem}
+    #anfrage > div > div:nth-child(2){padding:1.15rem 1rem!important}
+    #anfrage > div > div:nth-child(2) > div.mb-10{margin-bottom:1.5rem}
+    #quote-form label[class*="cursor-pointer"]{padding:.75rem .875rem;min-height:52px}
+    #quote-form legend{font-size:1.25rem}
 
-    #bewerbung .job-perks{grid-template-columns:1fr;gap:.875rem;margin-top:2rem}
-    #quick-apply-open{width:100%;text-align:center}
+    /* Karriere: Vorteile als kompakte Zeilen (Icon links, Text rechts) */
+    #bewerbung .job-perks{grid-template-columns:1fr;gap:.6rem;margin-top:1.5rem}
+    #bewerbung .job-perk{display:grid;grid-template-columns:2.5rem minmax(0,1fr);column-gap:.9rem;padding:.9rem 1rem}
+    #bewerbung .job-perk-icon{grid-row:1 / span 2;width:2.5rem;height:2.5rem;margin:0}
+    #bewerbung .job-perk-icon svg{width:1.25rem;height:1.25rem}
+    #bewerbung .job-perk h3{grid-column:2;font-size:1rem}
+    #bewerbung .job-perk p{grid-column:2;margin-top:.2rem;font-size:.875rem;line-height:1.5}
+    #bewerbung > div > div.mt-12{margin-top:1.5rem}
+    #quick-apply-open{width:100%;text-align:center;min-height:3rem}
 
-    .whatsapp-widget{right:.875rem;bottom:calc(var(--sticky-h) + .75rem);width:3.25rem;height:3.25rem}
-    .whatsapp-tooltip{display:none}
-
+    /* Schwebende Kontaktpunkte: eine Leiste statt Leiste + Button. WhatsApp
+       wandert in die Sticky-Leiste; der Floating-Button verdeckt so keinen Inhalt. */
+    .whatsapp-widget{display:none}
     .sticky-call-bar{
       position:fixed;inset:auto 0 0 0;z-index:40;
-      display:grid;grid-template-columns:1fr 1fr;gap:1px;
+      display:grid;grid-template-columns:1.25fr auto 1fr;gap:1px;
       background:var(--line);
       border-top:1px solid var(--line-strong);
       padding-bottom:env(safe-area-inset-bottom);
     }
     .sticky-call-bar a{
-      display:flex;align-items:center;justify-content:center;
-      min-height:68px;padding:.75rem .5rem;
+      display:flex;align-items:center;justify-content:center;gap:.45rem;
+      min-height:56px;padding:.5rem .5rem;
       font-family:'Barlow',sans-serif;font-size:.8125rem;font-weight:700;
-      letter-spacing:.02em;text-align:center;text-decoration:none;
+      letter-spacing:.02em;text-align:center;text-decoration:none;line-height:1.15;
     }
+    .sticky-call-bar a svg{width:1.25rem;height:1.25rem;flex:none}
     .sticky-call-bar .call{background:var(--accent);color:var(--accent-ink)}
+    .sticky-call-bar .whatsapp{width:3.5rem;background:var(--surface);color:var(--accent)}
     .sticky-call-bar .request{background:var(--surface-2);color:var(--fg)}
   }
 
   @media (max-width:400px){
-    h1,#top .hero-content h1{font-size:clamp(1.7rem,8vw,2.1rem)}
-    .showcase-final h2,h2{font-size:clamp(1.6rem,7.5vw,2rem)}
-    .showcase-final-facts > div{padding:.75rem .8rem}
+    h1,#top .hero-content h1{font-size:clamp(1.6rem,7.4vw,2rem)}
+    .showcase-final h2,h2{font-size:clamp(1.45rem,6.8vw,1.8rem)}
+    .showcase-final-facts > div{padding:.65rem .75rem}
     .showcase-final-facts strong{font-size:1.1rem}
+    #leistungen article{grid-template-columns:5.5rem minmax(0,1fr)}
   }
 
   /* --- 23. Demo-Hinweis (fixierte Top-Bar) -------------------------------- */
@@ -1039,7 +1119,7 @@
   <div id="quick-apply-modal" class="modal fixed inset-0 z-50 grid place-items-center p-5" hidden><div class="modal-card relative" role="dialog" aria-modal="true" aria-labelledby="quick-apply-title"><button id="quick-apply-close" type="button" class="absolute right-5 top-5 grid h-11 w-11 place-items-center border border-line text-2xl hover:bg-paper focus-ring" aria-label="Dialog schließen">×</button><p class="text-xs font-bold uppercase tracking-[.2em] text-rust">Quick-Bewerbung</p><h2 id="quick-apply-title" class="mt-3 font-display text-2xl font-bold">In 60 Sekunden bewerben</h2><p class="mt-2 text-sm text-ink/60">Nur 3 Angaben – wir melden uns pers&ouml;nlich, ganz ohne Lebenslauf.</p><form id="quick-apply-form" class="mt-6 space-y-4" novalidate><div><label for="qa-name">Name</label><input id="qa-name" name="name" type="text" autocomplete="name" required></div><div><label for="qa-phone">Telefonnummer</label><input id="qa-phone" name="phone" type="tel" autocomplete="tel" required></div><div><label for="qa-experience">Berufserfahrung</label><select id="qa-experience" name="experience" required><option value="">Bitte wählen</option><option>Auszubildender</option><option>Geselle</option><option>Meister</option><option>Quereinsteiger</option></select></div><button type="submit" class="mt-2 flex w-full min-h-12 items-center justify-center gap-2 bg-rust text-sm font-bold text-ink hover:bg-[#E5B263] focus-ring">Jetzt absenden</button></form><p id="quick-apply-status" class="mt-4 text-sm leading-6 text-ink/80" role="status" aria-live="polite" hidden></p></div></div>
   <div id="service-detail-modal" class="modal fixed inset-0 z-50 grid place-items-center p-5" hidden><div class="relative max-h-[85vh] w-full max-w-2xl overflow-y-auto bg-white p-6 shadow-2xl sm:p-10" role="dialog" aria-modal="true" aria-labelledby="service-detail-title"><button id="service-detail-close" type="button" class="absolute right-5 top-5 grid h-11 w-11 place-items-center border border-line text-2xl hover:bg-paper focus-ring" aria-label="Dialog schließen">×</button><p class="text-xs font-bold uppercase tracking-[.2em] text-rust">Leistungsumfang</p><h2 id="service-detail-title" class="mt-4 font-display text-3xl font-bold"></h2><div id="service-detail-content" class="mt-6 space-y-4 text-sm leading-7 text-ink/75"></div><a href="#anfrage" id="service-detail-cta" class="mt-8 inline-flex min-h-12 items-center justify-center gap-2 bg-rust px-6 text-sm font-bold text-ink hover:bg-[#E5B263] focus-ring">Direkt zur Express-Anfrage →</a></div></div>
   <a id="whatsapp-widget" class="whatsapp-widget" href="https://wa.me/49405550100?text=Hallo%20Nordkante%20Dachwerk%2C%20ich%20habe%20eine%20Frage%20zu%20einem%20Dachprojekt." target="_blank" rel="noopener noreferrer" aria-label="Frage per WhatsApp stellen"><svg width="28" height="28" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.3.6 4.4 1.7 6.3L4 29l7.9-1.6c1.8.9 3.9 1.5 6.1 1.5 6.6 0 12-5.4 12-12S22.6 3 16 3Zm0 21.8c-2 0-3.8-.5-5.4-1.5l-.4-.2-4.7 1 1-4.6-.3-.4C5.2 17.6 4.6 16.3 4.6 15 4.6 9 9.5 4.1 15.5 4.1S26.4 9 26.4 15 21.5 24.8 16 24.8Zm6-8.1c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.7.2-.2.3-.8 1.1-1 1.3-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-2-1.8-2.3-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2.1 3.2 5 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.5.3-.7.3-1.3.2-1.5-.1-.1-.3-.2-.6-.3Z"/></svg><span class="whatsapp-tooltip">Frage per WhatsApp stellen</span></a>
-  <div class="sticky-call-bar" aria-label="Schnellkontakt"><a class="call" href="tel:+49405550100">24/7 Notdienst anrufen</a><a class="request" href="#anfrage">Express-Anfrage</a></div>
+  <div class="sticky-call-bar" aria-label="Schnellkontakt"><a class="call" href="tel:+49405550100"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.8 2z"/></svg>Notdienst 24/7</a><a class="whatsapp" href="https://wa.me/49405550100?text=Hallo%20Nordkante%20Dachwerk%2C%20ich%20habe%20eine%20Frage%20zu%20einem%20Dachprojekt." target="_blank" rel="noopener noreferrer" aria-label="Frage per WhatsApp stellen"><svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.3.6 4.4 1.7 6.3L4 29l7.9-1.6c1.8.9 3.9 1.5 6.1 1.5 6.6 0 12-5.4 12-12S22.6 3 16 3Zm0 21.8c-2 0-3.8-.5-5.4-1.5l-.4-.2-4.7 1 1-4.6-.3-.4C5.2 17.6 4.6 16.3 4.6 15 4.6 9 9.5 4.1 15.5 4.1S26.4 9 26.4 15 21.5 24.8 16 24.8Zm6-8.1c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.7.2-.2.3-.8 1.1-1 1.3-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-2-1.8-2.3-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2.1 3.2 5 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.5.3-.7.3-1.3.2-1.5-.1-.1-.3-.2-.6-.3Z"/></svg></a><a class="request" href="#anfrage">Express-Anfrage</a></div>
   <script>
     (()=>{
       document.querySelectorAll('a[href^="tel:"]').forEach(link=>{link.href='tel:+49405550100'});document.querySelectorAll('p').forEach(paragraph=>{if(paragraph.textContent.trim()==='4,9 von 5 · 86 Bewertungen')paragraph.remove()});const menuButton=document.querySelector('#menu-button'),mobileMenu=document.querySelector('#mobile-menu');
