@@ -904,14 +904,10 @@ footer .border-t{border-color:var(--line)}
   .showcase-final-facts strong{font-size:1.2rem}
   .showcase-final-facts span{margin-top:.1rem;font-size:.75rem}
 
-  /* Team: horizontales Karussell mit Scroll-Snap; die naechste Karte lugt hervor */
-  .team-grid{
-    display:flex;gap:.75rem;margin:1.5rem -20px 0;padding:0 20px .25rem;
-    overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:20px;
-    -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:none;
-  }
-  .team-grid::-webkit-scrollbar{display:none}
-  .team-card{flex:0 0 min(68%,15rem);scroll-snap-align:start}
+  /* Team: Karten volle Breite untereinander, Foto flacher beschnitten */
+  .team-grid{grid-template-columns:1fr;gap:.75rem;margin-top:1.5rem}
+  .team-card{width:100%}
+  .team-card img{aspect-ratio:4/3}
   .team-card figcaption{padding:.8rem .9rem .95rem}
   .team-card figcaption strong{font-size:.9375rem}
   .team-card figcaption span{font-size:.75rem;line-height:1.35}
@@ -1098,9 +1094,9 @@ body > header{top:var(--demo-bar-h)!important}
 }
 
 /* --- 26. Unterseiten: Intro, Fakten, Stellen, Abschluss-CTA -------------- */
-.page-intro{padding:8.5rem 0 3rem;border-bottom:1px solid var(--line)}
+.page-intro{padding:8.5rem 0 2.5rem;border-bottom:1px solid var(--line)}
 .page-intro > div{max-width:80rem;margin-inline:auto;padding-inline:1.25rem}
-.page-intro h1{max-width:22ch;margin:1rem 0 0;font-size:clamp(2.25rem,1.55rem + 2.7vw,3.4rem);line-height:1.05;letter-spacing:-.03em} /* Klassen-Spezifitaet: schlaegt Tailwinds h1-Reset */
+.page-intro h1{max-width:22ch;margin:0;font-size:clamp(2.25rem,1.55rem + 2.7vw,3.4rem);line-height:1.05;letter-spacing:-.03em} /* Klassen-Spezifitaet: schlaegt Tailwinds h1-Reset */
 .page-lead{max-width:60ch;margin-top:1.25rem;color:var(--fg-2);font-size:1.125rem;line-height:1.6}
 .breadcrumb{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1.5rem;padding:0;list-style:none;color:var(--fg-3);font-size:.875rem}
 .breadcrumb a{color:var(--fg-2);text-decoration:underline;text-decoration-color:var(--line-strong)}
@@ -1110,7 +1106,7 @@ body > header{top:var(--demo-bar-h)!important}
 /* Zahlenzeile: vier Werte, eine Linie darueber, Barlow in Messing */
 .about-facts{
   display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;
-  margin:2.75rem 0 0;padding:0;list-style:none;
+  margin:2.25rem 0 0;padding:0;list-style:none;
 }
 .about-facts li{
   padding:1.4rem 1.5rem 1.5rem;
@@ -1119,15 +1115,6 @@ body > header{top:var(--demo-bar-h)!important}
 }
 .about-facts strong{display:block;font-family:'Barlow',sans-serif;font-size:1.875rem;font-weight:700;line-height:1;letter-spacing:-.02em;color:var(--fg)}
 .about-facts span{display:block;margin-top:.55rem;color:var(--fg-2);font-size:.9375rem;line-height:1.4}
-
-/* Ueber uns: Leitsaetze als zweispaltige Liste mit Messing-Haken */
-.about-values{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem 2.5rem;margin:2rem 0 0;padding:0;list-style:none}
-.about-values li{position:relative;padding-left:1.75rem;color:var(--fg-2)}
-.about-values li::before{
-  content:"";position:absolute;left:0;top:.35rem;width:1rem;height:1rem;
-  background:var(--accent);-webkit-mask:var(--icon-check) center/contain no-repeat;mask:var(--icon-check) center/contain no-repeat;
-}
-.about-values strong{display:block;color:var(--fg);font-family:'Barlow',sans-serif;font-size:1.0625rem}
 
 /* Stellenliste: eine Zeile pro Stelle, Haarlinien statt Karten */
 .jobs-list{margin-top:2.5rem;border-top:1px solid var(--line)}
@@ -1170,14 +1157,15 @@ body > header{top:var(--demo-bar-h)!important}
   .about-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:767px){
-  .page-intro{padding:6.5rem 0 2.25rem}
+  .page-intro{padding:6.5rem 0 2rem}
+  .breadcrumb{align-items:center;margin-bottom:1rem}
+  .breadcrumb a{display:inline-flex;align-items:center;min-height:2.75rem} /* 44px Touch-Target */
   .page-intro > div,.page-cta > div{padding-inline:20px}
   .page-lead{font-size:1rem;line-height:1.55}
   .about-facts{gap:.6rem;margin-top:1.75rem}
   .about-facts li{padding:1rem 1.1rem 1.1rem}
   .about-facts strong{font-size:1.5rem}
   .about-facts span{margin-top:.4rem;font-size:.875rem}
-  .about-values{grid-template-columns:1fr;gap:.9rem;margin-top:1.5rem}
   .jobs-list{margin-top:1.75rem}
   .jobs-list article{grid-template-columns:1fr;gap:.75rem;padding:1.1rem 0}
   .jobs-list .btn-line{width:100%}
@@ -1185,7 +1173,9 @@ body > header{top:var(--demo-bar-h)!important}
   .page-cta-actions{width:100%}
   .page-cta-actions > a{flex:1 1 100%}
   .btn-accent,.btn-emergency{width:100%}
+  /* Textlinks in Header und Footer auf 44px Touch-Target heben */
+  header a[aria-label],header a[href^="tel:"],footer address a{display:inline-flex;align-items:center;min-height:2.75rem}
 }
-@media (max-width:380px){
+@media (max-width:339px){
   .about-facts{grid-template-columns:1fr;gap:.5rem}
 }
